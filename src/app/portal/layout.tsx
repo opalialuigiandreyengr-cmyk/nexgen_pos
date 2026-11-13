@@ -1,10 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Activity, Building2, Inbox } from "lucide-react";
 import { requireSuperAdmin } from "@/lib/supabase/server";
 import { PortalSignOutButton } from "@/components/portal-signout";
-
-export const dynamic = "force-dynamic";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default async function PortalLayout({
   children,
@@ -17,41 +17,48 @@ export default async function PortalLayout({
   }
 
   return (
-    <div className="min-h-screen flex bg-background text-foreground">
-      <aside className="w-56 shrink-0 border-r border-border bg-card/60 flex flex-col justify-between p-4">
+    <div className="min-h-screen flex bg-background text-foreground transition-colors duration-200">
+      <aside className="w-60 shrink-0 border-r border-border bg-card flex flex-col justify-between p-4">
         <div className="space-y-6">
-          <Link href="/portal" className="flex items-center gap-2 font-semibold text-sm">
-            <span className="h-6 w-6 rounded-md bg-primary/15 border border-primary/40 flex items-center justify-center text-primary text-xs font-mono">
-              NG
-            </span>
-            <span>SuperAdmin</span>
+          <Link href="/portal" className="flex items-center gap-2.5 font-display font-bold text-sm tracking-tight">
+            <div className="relative h-7 w-7 rounded-md overflow-hidden border border-primary/40 bg-secondary shrink-0">
+              <Image src="/box_logo.png" alt="NexGen" fill sizes="28px" className="object-contain p-0.5" priority />
+            </div>
+            <div className="flex flex-col leading-tight">
+              <span>NexGen Fleet</span>
+              <span className="text-[10px] font-mono text-muted-foreground uppercase">SuperAdmin</span>
+            </div>
           </Link>
-          <nav className="space-y-1 text-sm">
+          <nav className="space-y-1 text-xs uppercase font-medium tracking-wider">
             <Link
               href="/portal"
-              className="flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+              className="flex items-center gap-2.5 rounded-md px-3 py-2 text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
             >
-              <Activity className="h-4 w-4" />
-              <span>Overview</span>
+              <Activity className="h-4 w-4 text-primary" />
+              <span>Fleet Overview</span>
             </Link>
             <Link
               href="/portal/clients"
-              className="flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+              className="flex items-center gap-2.5 rounded-md px-3 py-2 text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
             >
-              <Building2 className="h-4 w-4" />
-              <span>Clients</span>
+              <Building2 className="h-4 w-4 text-sky-400" />
+              <span>Client Registry</span>
             </Link>
             <Link
               href="/portal/leads"
-              className="flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+              className="flex items-center gap-2.5 rounded-md px-3 py-2 text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
             >
-              <Inbox className="h-4 w-4" />
+              <Inbox className="h-4 w-4 text-indigo-400" />
               <span>Demo Leads</span>
             </Link>
           </nav>
         </div>
-        <div className="space-y-2 border-t border-border pt-3">
-          <div className="px-2 text-[11px] text-muted-foreground truncate" title={user.email || ""}>
+        <div className="space-y-3 border-t border-border pt-4">
+          <div className="flex items-center justify-between px-1">
+            <span className="text-[11px] text-muted-foreground">Theme</span>
+            <ThemeToggle />
+          </div>
+          <div className="px-1 text-[11px] font-mono text-muted-foreground truncate" title={user.email || ""}>
             {user.email}
           </div>
           <PortalSignOutButton />
@@ -61,4 +68,3 @@ export default async function PortalLayout({
     </div>
   );
 }
-

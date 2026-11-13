@@ -1,12 +1,15 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createBrowserClient } from "@supabase/ssr";
-import { Loader2, Lock } from "lucide-react";
+import { ArrowLeft, Loader2, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input, Label } from "@/components/ui/input";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function PortalLoginPage() {
   const router = useRouter();
@@ -42,52 +45,72 @@ export default function PortalLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-sm">
-        <CardHeader className="space-y-1">
-          <div className="h-8 w-8 rounded-md border border-border bg-secondary flex items-center justify-center text-primary mb-2">
-            <Lock className="h-4 w-4" />
-          </div>
-          <CardTitle className="text-lg">SuperAdmin Portal</CardTitle>
-          <CardDescription className="text-xs">
-            Sign in with your Supabase operator credentials.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={onSubmit} className="space-y-3.5">
-            <div className="space-y-1.5">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4 relative">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+
+      <div className="w-full max-w-sm space-y-4">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" /> Back to Landing Page
+        </Link>
+
+        <Card className="border-primary/30 shadow-xl brand-glow">
+          <CardHeader className="space-y-2">
+            <div className="flex items-center justify-between">
+              <div className="relative h-10 w-10 rounded-lg overflow-hidden border border-primary/40 bg-card">
+                <Image src="/box_logo.png" alt="NexGen Logo" fill sizes="40px" className="object-contain p-0.5" priority />
+              </div>
+              <div className="h-8 w-8 rounded-md border border-border bg-secondary flex items-center justify-center text-primary">
+                <Lock className="h-4 w-4" />
+              </div>
             </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+            <div>
+              <CardTitle className="text-lg font-display font-bold">SuperAdmin Portal</CardTitle>
+              <CardDescription className="text-xs">
+                Sign in with your verified Supabase operator credentials.
+              </CardDescription>
             </div>
-            {error && (
-              <p className="text-xs text-red-400 border border-red-500/30 bg-red-500/10 rounded-md px-3 py-2">
-                {error}
-              </p>
-            )}
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-              Sign In
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={onSubmit} className="space-y-3.5">
+              <div className="space-y-1.5">
+                <Label htmlFor="email">Operator Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="admin@nexgenpos.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              {error && (
+                <p className="text-xs text-red-400 border border-red-500/30 bg-red-500/10 rounded-md px-3 py-2">
+                  {error}
+                </p>
+              )}
+              <Button type="submit" className="w-full brand-gradient text-white font-display font-bold" disabled={loading}>
+                {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                Sign In to Fleet Portal
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
-

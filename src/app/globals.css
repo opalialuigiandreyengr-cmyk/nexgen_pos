@@ -1,25 +1,59 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --card: #111114;
-  --card-foreground: #fafafa;
-  --popover: #111114;
-  --popover-foreground: #fafafa;
-  --primary: #10b981;
-  --primary-foreground: #052e16;
-  --secondary: #18181b;
-  --secondary-foreground: #fafafa;
-  --muted: #18181b;
-  --muted-foreground: #a1a1aa;
-  --accent: #27272a;
-  --accent-foreground: #fafafa;
+  /* NexGen POS Light Theme - Clean White & Electric Blue */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  
+  /* Brand Primary: Electric Azure Blue */
+  --primary: #0284c7;
+  --primary-foreground: #ffffff;
+  
+  /* Slate & Accent surfaces */
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #e0f2fe;
+  --accent-foreground: #0369a1;
   --destructive: #ef4444;
-  --border: #27272a;
-  --input: #27272a;
-  --ring: #10b981;
-  --radius: 0.5rem;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #0284c7;
+  --radius: 0.6rem;
+}
+
+.dark {
+  /* NexGen POS Dark Theme - Deep Midnight Navy & Glowing Electric Cyan */
+  --background: #070e20;
+  --foreground: #f8fafc;
+  --card: #0d172e;
+  --card-foreground: #f8fafc;
+  --popover: #0d172e;
+  --popover-foreground: #f8fafc;
+  
+  /* Brand Primary: Vibrant Cyan / Sky Blue */
+  --primary: #38bdf8;
+  --primary-foreground: #082f49;
+  
+  /* Midnight Navy surfaces */
+  --secondary: #132042;
+  --secondary-foreground: #f8fafc;
+  --muted: #132042;
+  --muted-foreground: #94a3b8;
+  --accent: #1e335e;
+  --accent-foreground: #38bdf8;
+  --destructive: #f87171;
+  --destructive-foreground: #ffffff;
+  --border: #1e2f52;
+  --input: #1e2f52;
+  --ring: #38bdf8;
+  --radius: 0.6rem;
 }
 
 @theme inline {
@@ -36,10 +70,12 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
   --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-space-grotesk);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -52,8 +88,35 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-space-grotesk), var(--font-geist-sans), system-ui, sans-serif;
+  letter-spacing: -0.025em;
 }
 
 .tabular-nums {
   font-variant-numeric: tabular-nums;
+}
+
+/* Subtle glow effects matching the box logo */
+.brand-glow {
+  box-shadow: 0 0 35px -8px rgba(56, 189, 248, 0.35);
+}
+
+.brand-gradient {
+  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+}
+
+.dark .brand-gradient-text {
+  background: linear-gradient(135deg, #e0f2fe 0%, #38bdf8 60%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-gradient-text {
+  background: linear-gradient(135deg, #0369a1 0%, #0284c7 60%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
