@@ -30,42 +30,36 @@ const PILLARS = [
     icon: WifiOff,
     title: "100% Offline-First Speed",
     badge: "SQLite WAL Engine",
-    color: "sky",
     desc: "Broadband drops never freeze your counter during peak hours. NexGen punches orders, prints receipts, and updates tables locally in 0.1s, auto-syncing when internet restores.",
   },
   {
     icon: FileCheck,
     title: "Automated BIR 2024 Compliance",
     badge: "Senior & PWD Formula",
-    color: "amber",
     desc: "Strictly compliant with BIR rules. Auto-computes 12% VAT exemption followed by 20% discount (R.A. 9994/10754), tracks NGRT grand totals, and generates 7 official audit books.",
   },
   {
     icon: Building,
     title: "Mall Tenant RLC Generator",
     badge: "SM · Ayala · Robinsons · Megaworld",
-    color: "sky",
     desc: "Operating in a major shopping mall? Generate compliant daily end-of-day sales TXT files for SM Tenant, Robinsons RLC, Ayala CIRS, and Megaworld in one click.",
   },
   {
     icon: Printer,
     title: "Kitchen Impact & Thermal Routing",
     badge: "Cashier · Bar · Hot Kitchen",
-    color: "amber",
     desc: "Route sizzling hot tickets to heat-resistant dot-matrix impact printers (Epson TM-U220) so orders never fade under steam, while issuing thermal receipts at the front counter.",
   },
   {
     icon: Scale,
     title: "Raw Ingredient Food Costing",
     badge: "Gram & Portion Tracking",
-    color: "sky",
     desc: "Track ingredient depletion to the exact gram. As dishes sell, buns, meat, cheese, and syrups deduct automatically from inventory with timely low-stock reorder alerts.",
   },
   {
     icon: CloudCheck,
     title: "Multi-Store Owner Cloud Portal",
     badge: "Supabase Telemetry",
-    color: "amber",
     desc: "Monitor live gross/net sales, active dine-in tables, and Z-reading counters from your smartphone anytime. Encrypted rolling backups keep all your store data secure.",
   },
 ];
@@ -348,17 +342,11 @@ export default function LandingPage() {
                 return (
                   <Card
                     key={idx}
-                    className="p-6 sm:p-7 rounded-xl border border-border bg-card hover:border-sky-500/40 transition-all shadow-xs hover:shadow-sm flex flex-col justify-between"
+                    className="p-6 sm:p-7 rounded-xl border border-border bg-card hover:border-slate-400/40 dark:hover:border-slate-700 transition-all shadow-xs hover:shadow-sm flex flex-col justify-between"
                   >
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <div
-                          className={`w-11 h-11 rounded-lg flex items-center justify-center ${
-                            p.color === "sky"
-                              ? "bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20"
-                              : "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
-                          }`}
-                        >
+                        <div className="w-10 h-10 rounded-lg bg-secondary/80 border border-border text-foreground flex items-center justify-center">
                           <Icon className="h-5 w-5" />
                         </div>
                         <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-secondary text-muted-foreground border border-border">
@@ -538,7 +526,7 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {HARDWARE_ITEMS.map((item, i) => (
                 <Card key={i} className="p-5 sm:p-6 rounded-xl border border-border bg-card shadow-xs space-y-3">
-                  <div className="w-10 h-10 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-secondary/80 border border-border text-foreground flex items-center justify-center">
                     <Laptop className="h-5 w-5" />
                   </div>
                   <h3 className="text-base sm:text-lg font-bold font-display text-foreground">
