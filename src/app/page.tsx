@@ -160,43 +160,43 @@ export default function LandingPage() {
         {/* ==============================================================
             HERO SECTION — full-bleed background image with built-in fade
             ============================================================== */}
-        <section className="relative overflow-hidden border-b border-border bg-background flex flex-col lg:block lg:min-h-[640px]">
-          {/* Full-bleed background photo: anchored right, table & hardware 100% opaque, controlled left-fade */}
-          <div className="relative order-2 lg:order-none h-72 sm:h-96 lg:h-auto lg:absolute lg:inset-0 w-full pointer-events-none select-none">
+        <section className="relative overflow-hidden border-b border-border bg-background flex flex-col lg:block lg:min-h-[600px]">
+          {/* Background photo (hero.png already fades to the left; overlay blends it into the theme bg) */}
+          <div className="relative order-2 lg:order-none h-64 sm:h-96 lg:h-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[75%]">
             <Image
               src="/images/hero.png"
               alt="NexGen POS touch terminal showing table management beside a receipt printer on a cafe counter"
               fill
               priority
-              sizes="100vw"
-              className="object-cover object-right dark:brightness-85"
+              sizes="(max-width: 1024px) 100vw, 75vw"
+              className="object-cover object-right dark:brightness-90"
             />
-            {/* Desktop: controlled fade on left 38% only — stops well before the printer (45%) & monitor (55%) */}
-            <div className="hidden lg:block absolute inset-y-0 left-0 w-[38%] bg-gradient-to-r from-background from-0% via-background/50 via-50% to-transparent to-100%" />
-            {/* Mobile: soft fade into the text block above it */}
-            <div className="lg:hidden absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-background to-transparent" />
+            {/* Desktop: fade image into the page background from the left, lessened to the right to preserve hardware opacity */}
+            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-background from-0% via-background/60 via-10% to-transparent to-25%" />
+            {/* Mobile: fade image into the text block above it */}
+            <div className="lg:hidden absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-background to-transparent" />
           </div>
 
           {/* Content */}
-          <div className="relative z-10 order-1 lg:order-none max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-10 pb-6 sm:pt-14 lg:py-20 lg:min-h-[640px] flex items-center">
+          <div className="relative z-10 order-1 lg:order-none max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-10 pb-6 sm:pt-14 lg:py-20 lg:min-h-[600px] flex items-center">
             <div className="w-full lg:max-w-[34rem] space-y-6 text-center lg:text-left">
               {/* Badge with PH flag */}
-              <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-900 dark:text-amber-200 text-xs sm:text-sm font-semibold shadow-xs">
+              <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-800 dark:text-amber-300 text-xs sm:text-sm font-semibold shadow-xs">
                 <Image
                   src="/images/flag.png"
                   alt="Philippine flag"
-                  width={22}
-                  height={22}
-                  className="h-5.5 w-5.5 rounded-full object-cover shadow-xs"
+                  width={24}
+                  height={24}
+                  className="h-6 w-6 rounded-full"
                 />
                 <span>Modern POS for Philippine Businesses</span>
               </div>
 
-              {/* Headline — styled matching mockup and navbar tones */}
-              <h1 className="font-extrabold font-display tracking-tight leading-[1.12] text-3xl sm:text-5xl lg:text-[3.1rem] text-[#0f172a] dark:text-white">
+              {/* Headline — three lines, same as mockup */}
+              <h1 className="font-extrabold font-display tracking-tight leading-[1.12] text-3xl sm:text-5xl lg:text-[3.1rem] text-foreground">
                 <span className="block">A Smarter,</span>
-                <span className="block text-[#0f172a] dark:text-sky-400">BIR-Ready POS</span>
-                <span className="relative inline-block text-[#0f172a] dark:text-white">
+                <span className="block text-[#1e293b] dark:text-sky-400">BIR-Ready POS</span>
+                <span className="relative inline-block">
                   for Growing Businesses
                   <svg
                     className="absolute -bottom-2 left-0 w-full h-3 text-amber-500"
@@ -210,7 +210,7 @@ export default function LandingPage() {
                 </span>
               </h1>
 
-              <p className="text-base sm:text-lg text-foreground/85 leading-relaxed max-w-md mx-auto lg:mx-0 font-normal">
+              <p className="text-base sm:text-lg text-foreground/80 leading-relaxed max-w-md mx-auto lg:mx-0">
                 Run your sales, tables, orders, and reports with confidence. Built for Philippine businesses — with BIR discount support, mall reporting, and offline reliability.
               </p>
 
@@ -219,7 +219,7 @@ export default function LandingPage() {
                 <a href="#demo" className="w-full sm:w-auto">
                   <Button
                     size="lg"
-                    className="w-full sm:w-auto h-12 px-8 text-base font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-lg shadow-md transition-all hover:scale-[1.01]"
+                    className="w-full sm:w-auto h-12 px-8 text-base font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-lg shadow-md"
                   >
                     Request a Demo
                     <ArrowRight className="h-4 w-4 ml-2" />
@@ -229,30 +229,27 @@ export default function LandingPage() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-lg border-border bg-background/90 backdrop-blur-sm hover:bg-accent text-foreground shadow-xs"
+                    className="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-lg border-border bg-background/80 backdrop-blur-sm hover:bg-accent text-foreground"
                   >
                     View Pricing
                   </Button>
                 </a>
               </div>
 
-              {/* Proof points — centered icon with navbar gradient, structured pill cards */}
-              <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-left w-full">
+              {/* Proof points — icon badge uses the navbar gradient, icon centered */}
+              <ul className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-4 sm:gap-0 sm:divide-x sm:divide-border pt-2 text-left w-full">
                 {[
-                  { icon: ShieldCheck, title: "BIR Discount", sub: "Ready (RA 9994/10754)" },
+                  { icon: ShieldCheck, title: "BIR Discount Ready", sub: "RA 9994 / RA 10754" },
                   { icon: WifiOff, title: "Works Offline", sub: "No Internet? No Problem" },
                   { icon: BarChart3, title: "Mall Reporting", sub: "Concessionaire Ready" },
                 ].map(({ icon: Icon, title, sub }) => (
-                  <li
-                    key={title}
-                    className="flex items-center gap-2.5 p-2 sm:px-3 sm:py-2 rounded-xl border border-border/80 bg-background/80 backdrop-blur-xs shadow-xs"
-                  >
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-700 bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white shadow-sm">
-                      <Icon className="h-4.5 w-4.5" aria-hidden="true" />
+                  <li key={title} className="flex items-center gap-2.5 sm:flex-1 min-w-0 sm:px-3 first:sm:pl-0 last:sm:pr-0">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-600/70 bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white shadow-sm">
+                      <Icon className="h-4 w-4" aria-hidden="true" />
                     </span>
-                    <span className="leading-tight min-w-0">
-                      <span className="block text-xs sm:text-sm font-bold text-foreground truncate">{title}</span>
-                      <span className="block text-[11px] text-muted-foreground truncate">{sub}</span>
+                    <span className="leading-tight">
+                      <span className="block text-sm font-bold text-foreground">{title}</span>
+                      <span className="block text-xs text-muted-foreground">{sub}</span>
                     </span>
                   </li>
                 ))}
