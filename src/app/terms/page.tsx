@@ -1,7 +1,5 @@
-import Link from "next/image";
 import NextLink from "next/link";
-import Image from "next/image";
-import { ArrowLeft, ShieldCheck, FileText, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, FileText } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata = {

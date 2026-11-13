@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
+  BarChart3,
   Building,
   CheckCircle2,
   CloudCheck,
@@ -9,7 +10,6 @@ import {
   HelpCircle,
   Laptop,
   Printer,
-  Receipt,
   Scale,
   ShieldCheck,
   WifiOff,
@@ -158,137 +158,102 @@ export default function LandingPage() {
 
       <main className="flex-1">
         {/* ==============================================================
-            HERO SECTION (REDESIGNED BASED ON LIVE MOCKUP REFERENCE)
+            HERO SECTION — full-bleed background image with built-in fade
             ============================================================== */}
-        <section className="relative overflow-hidden pt-10 pb-16 sm:pt-14 sm:pb-20 border-b border-border">
-          {/* Subtle background glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-80 bg-gradient-to-b from-sky-500/10 via-amber-500/5 to-transparent blur-3xl pointer-events-none" />
+        <section className="relative overflow-hidden border-b border-border bg-background flex flex-col lg:block lg:min-h-[600px]">
+          {/* Background photo (hero.png already fades to the left; overlay blends it into the theme bg) */}
+          <div className="relative order-2 lg:order-none h-64 sm:h-96 lg:h-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[75%]">
+            <Image
+              src="/images/hero.png"
+              alt="NexGen POS touch terminal showing table management beside a receipt printer on a cafe counter"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 75vw"
+              className="object-cover object-right dark:brightness-90"
+            />
+            {/* Desktop: fade image into the page background from the left */}
+            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-background from-0% via-background/80 via-20% to-transparent to-55%" />
+            {/* Mobile: fade image into the text block above it */}
+            <div className="lg:hidden absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-background to-transparent" />
+          </div>
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
-              {/* Hero Left: Value Proposition & Typography */}
-              <div className="lg:col-span-6 space-y-5 text-center lg:text-left">
-                {/* Official Compliance Badge */}
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400 text-xs font-semibold shadow-xs">
-                  <span className="text-sm">🇵🇭</span>
-                  <span>Modern POS for Philippine Businesses</span>
-                </div>
-
-                {/* Main Heading with Accent Emphasis & Curved Underline */}
-                <h1 className="text-3xl sm:text-4xl md:text-[2.85rem] font-extrabold font-display tracking-tight text-foreground leading-[1.18]">
-                  A Smarter,{" "}
-                  <span className="text-sky-600 dark:text-sky-400">BIR-Ready POS</span>{" "}
-                  for{" "}
-                  <span className="relative inline-block text-foreground">
-                    Growing Businesses
-                    <svg
-                      className="absolute -bottom-1.5 left-0 w-full h-2.5 text-amber-500"
-                      viewBox="0 0 100 12"
-                      preserveAspectRatio="none"
-                      fill="none"
-                    >
-                      <path
-                        d="M1,8 Q50,0 99,8"
-                        stroke="currentColor"
-                        strokeWidth="3.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </span>
-                </h1>
-
-                {/* Clean, Non-Wordy Subtitle */}
-                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
-                  Run your sales, tables, orders, and reports with confidence. Built for Philippine businesses — with BIR discount support, mall reporting, and offline reliability.
-                </p>
-
-                {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-1">
-                  <a href="#demo" className="w-full sm:w-auto">
-                    <Button
-                      size="default"
-                      className="w-full sm:w-auto h-11 px-7 text-sm font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-xl shadow-md transition-all hover:scale-[1.02] active:scale-[0.98]"
-                    >
-                      Request a Demo
-                      <ArrowRight className="h-4 w-4 ml-2" />
-                    </Button>
-                  </a>
-                  <a href="#pricing" className="w-full sm:w-auto">
-                    <Button
-                      variant="outline"
-                      size="default"
-                      className="w-full sm:w-auto h-11 px-6 text-sm font-semibold rounded-xl border-border bg-card hover:bg-accent text-foreground shadow-xs"
-                    >
-                      View Pricing
-                    </Button>
-                  </a>
-                </div>
-
-                {/* 3 Key Feature Proof Points */}
-                <div className="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-left border-t border-border/80">
-                  {/* Point 1: BIR Discount Ready */}
-                  <div className="flex items-start gap-2.5 p-2 rounded-lg bg-secondary/40 border border-border/50">
-                    <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0 mt-0.5" />
-                    <div>
-                      <div className="text-xs sm:text-sm font-bold text-foreground">BIR Discount</div>
-                      <div className="text-[11px] text-muted-foreground">Ready (RA 9994/10754)</div>
-                    </div>
-                  </div>
-
-                  {/* Point 2: Works Offline */}
-                  <div className="flex items-start gap-2.5 p-2 rounded-lg bg-secondary/40 border border-border/50">
-                    <WifiOff className="h-5 w-5 text-sky-500 shrink-0 mt-0.5" />
-                    <div>
-                      <div className="text-xs sm:text-sm font-bold text-foreground">Works Offline</div>
-                      <div className="text-[11px] text-muted-foreground">No Internet? No Problem</div>
-                    </div>
-                  </div>
-
-                  {/* Point 3: Mall Reporting */}
-                  <div className="flex items-start gap-2.5 p-2 rounded-lg bg-secondary/40 border border-border/50">
-                    <Building className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
-                    <div>
-                      <div className="text-xs sm:text-sm font-bold text-foreground">Mall Reporting</div>
-                      <div className="text-[11px] text-muted-foreground">SM, Ayala, Robinsons</div>
-                    </div>
-                  </div>
-                </div>
+          {/* Content */}
+          <div className="relative z-10 order-1 lg:order-none max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-10 pb-6 sm:pt-14 lg:py-20 lg:min-h-[600px] flex items-center">
+            <div className="w-full lg:max-w-[34rem] space-y-6 text-center lg:text-left">
+              {/* Badge with PH flag */}
+              <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-800 dark:text-amber-300 text-xs sm:text-sm font-semibold shadow-xs">
+                <Image
+                  src="/images/flag.png"
+                  alt="Philippine flag"
+                  width={24}
+                  height={24}
+                  className="h-6 w-6 rounded-full"
+                />
+                <span>Modern POS for Philippine Businesses</span>
               </div>
 
-              {/* Hero Right: Touch Terminal Mockup Display */}
-              <div className="lg:col-span-6">
-                <div className="relative rounded-2xl border border-border bg-card p-2 sm:p-3 shadow-2xl overflow-hidden group">
-                  {/* Outer Ambient Glow */}
-                  <div className="absolute -top-12 -right-12 w-48 h-48 bg-sky-500/10 rounded-full blur-2xl pointer-events-none" />
+              {/* Headline — three lines, same as mockup */}
+              <h1 className="font-extrabold font-display tracking-tight leading-[1.12] text-3xl sm:text-5xl lg:text-[3.1rem] text-foreground">
+                <span className="block">A Smarter,</span>
+                <span className="block text-[#1e293b] dark:text-sky-400">BIR-Ready POS</span>
+                <span className="relative inline-block">
+                  for Growing Businesses
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full h-3 text-amber-500"
+                    viewBox="0 0 100 12"
+                    preserveAspectRatio="none"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path d="M1,8 Q50,0 99,8" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
+                  </svg>
+                </span>
+              </h1>
 
-                  {/* High-Resolution Terminal & Printer Asset */}
-                  <div className="relative w-full h-[320px] sm:h-[400px] md:h-[440px] rounded-xl overflow-hidden bg-slate-900 border border-border/80">
-                    <Image
-                      src="/images/hero-pos-terminal-display.jpg"
-                      alt="NexGen POS Touch Terminal with Table Management and Thermal Printer"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 600px"
-                      className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
-                      priority
-                    />
-                    
-                    {/* Subtle Overlay Badge */}
-                    <div className="absolute top-3 right-3 bg-black/75 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-white text-[11px] font-semibold flex items-center gap-1.5 shadow-md">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      Table Service &amp; Dine-in Mode
-                    </div>
+              <p className="text-base sm:text-lg text-foreground/80 leading-relaxed max-w-md mx-auto lg:mx-0">
+                Run your sales, tables, orders, and reports with confidence. Built for Philippine businesses — with BIR discount support, mall reporting, and offline reliability.
+              </p>
 
-                    {/* Bottom Status Ticker */}
-                    <div className="absolute bottom-3 left-3 right-3 bg-black/80 backdrop-blur-md p-2.5 rounded-lg border border-white/10 flex items-center justify-between text-white text-xs">
-                      <div className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                        <span className="text-slate-300 font-medium text-[11px]">Cashier &amp; Kitchen LAN: Connected</span>
-                      </div>
-                      <span className="text-[11px] text-amber-400 font-bold font-mono">SQLite WAL 0.08s</span>
-                    </div>
-                  </div>
-                </div>
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
+                <a href="#demo" className="w-full sm:w-auto">
+                  <Button
+                    size="lg"
+                    className="w-full sm:w-auto h-12 px-8 text-base font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-lg shadow-md"
+                  >
+                    Request a Demo
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </Button>
+                </a>
+                <a href="#pricing" className="w-full sm:w-auto">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-lg border-border bg-background/80 backdrop-blur-sm hover:bg-accent text-foreground"
+                  >
+                    View Pricing
+                  </Button>
+                </a>
               </div>
+
+              {/* Proof points — icon badge uses the navbar gradient, icon centered */}
+              <ul className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-4 sm:gap-0 sm:divide-x sm:divide-border pt-2 text-left w-full">
+                {[
+                  { icon: ShieldCheck, title: "BIR Discount Ready", sub: "RA 9994 / RA 10754" },
+                  { icon: WifiOff, title: "Works Offline", sub: "No Internet? No Problem" },
+                  { icon: BarChart3, title: "Mall Reporting", sub: "Concessionaire Ready" },
+                ].map(({ icon: Icon, title, sub }) => (
+                  <li key={title} className="flex items-center gap-2.5 sm:flex-1 min-w-0 sm:px-3 first:sm:pl-0 last:sm:pr-0">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-600/70 bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white shadow-sm">
+                      <Icon className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    <span className="leading-tight">
+                      <span className="block text-sm font-bold text-foreground">{title}</span>
+                      <span className="block text-xs text-muted-foreground">{sub}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </section>
