@@ -4,6 +4,8 @@ import { Activity, Building2, Inbox } from "lucide-react";
 import { requireSuperAdmin } from "@/lib/supabase/server";
 import { PortalSignOutButton } from "@/components/portal-signout";
 
+export const dynamic = "force-dynamic";
+
 export default async function PortalLayout({
   children,
 }: {
