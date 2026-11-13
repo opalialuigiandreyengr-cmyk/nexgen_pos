@@ -158,141 +158,134 @@ export default function LandingPage() {
 
       <main className="flex-1">
         {/* ==============================================================
-            HERO SECTION
+            HERO SECTION (REDESIGNED BASED ON LIVE MOCKUP REFERENCE)
             ============================================================== */}
-        <section className="relative overflow-hidden pt-12 pb-16 sm:pt-16 sm:pb-20 border-b border-border">
+        <section className="relative overflow-hidden pt-10 pb-16 sm:pt-14 sm:pb-20 border-b border-border">
           {/* Subtle background glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-72 bg-gradient-to-b from-sky-500/10 via-amber-500/5 to-transparent blur-3xl pointer-events-none" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-80 bg-gradient-to-b from-sky-500/10 via-amber-500/5 to-transparent blur-3xl pointer-events-none" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
-              {/* Hero Left: Value Proposition */}
-              <div className="lg:col-span-7 space-y-4 text-center lg:text-left">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+              {/* Hero Left: Value Proposition & Typography */}
+              <div className="lg:col-span-6 space-y-5 text-center lg:text-left">
                 {/* Official Compliance Badge */}
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-600 dark:text-sky-400 text-xs font-semibold shadow-xs">
-                  <ShieldCheck className="h-3.5 w-3.5" />
-                  <span>Philippine Offline Engine · BIR 2024 Ready</span>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400 text-xs font-semibold shadow-xs">
+                  <span className="text-sm">🇵🇭</span>
+                  <span>Modern POS for Philippine Businesses</span>
                 </div>
 
-                {/* Main Heading - Moderated size */}
-                <h1 className="text-3xl sm:text-4xl md:text-[2.75rem] font-extrabold font-display tracking-tight text-foreground leading-[1.18]">
-                  The Ultra-Reliable POS for <span className="text-sky-600 dark:text-sky-400">Philippine Food</span> &amp;{" "}
-                  <span className="text-amber-600 dark:text-amber-400">Retail</span>.
+                {/* Main Heading with Accent Emphasis & Curved Underline */}
+                <h1 className="text-3xl sm:text-4xl md:text-[2.85rem] font-extrabold font-display tracking-tight text-foreground leading-[1.18]">
+                  A Smarter,{" "}
+                  <span className="text-sky-600 dark:text-sky-400">BIR-Ready POS</span>{" "}
+                  for{" "}
+                  <span className="relative inline-block text-foreground">
+                    Growing Businesses
+                    <svg
+                      className="absolute -bottom-1.5 left-0 w-full h-2.5 text-amber-500"
+                      viewBox="0 0 100 12"
+                      preserveAspectRatio="none"
+                      fill="none"
+                    >
+                      <path
+                        d="M1,8 Q50,0 99,8"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
                 </h1>
 
-                {/* Clear, Non-wordy Subtitle */}
-                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                  Zero cashier downtime during internet drops. Automated BIR Senior &amp; PWD discounts, 1-click Mall Tenant RLC reports, and heat-resistant kitchen impact printing.
+                {/* Clean, Non-Wordy Subtitle */}
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
+                  Run your sales, tables, orders, and reports with confidence. Built for Philippine businesses — with BIR discount support, mall reporting, and offline reliability.
                 </p>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2">
+                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-1">
                   <a href="#demo" className="w-full sm:w-auto">
                     <Button
                       size="default"
-                      className="w-full sm:w-auto h-10 px-6 text-sm font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-lg shadow-md transition-all hover:scale-[1.02] active:scale-[0.98]"
+                      className="w-full sm:w-auto h-11 px-7 text-sm font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-xl shadow-md transition-all hover:scale-[1.02] active:scale-[0.98]"
                     >
-                      Book Free Live Demo
-                      <ArrowRight className="h-4 w-4 ml-1.5" />
+                      Request a Demo
+                      <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
                   </a>
-                  <a href="#features" className="w-full sm:w-auto">
+                  <a href="#pricing" className="w-full sm:w-auto">
                     <Button
                       variant="outline"
                       size="default"
-                      className="w-full sm:w-auto h-10 px-5 text-sm font-semibold rounded-lg border-border bg-card hover:bg-accent text-foreground"
+                      className="w-full sm:w-auto h-11 px-6 text-sm font-semibold rounded-xl border-border bg-card hover:bg-accent text-foreground shadow-xs"
                     >
-                      Explore Capabilities
+                      View Pricing
                     </Button>
                   </a>
                 </div>
 
-                {/* Key Bullet Highlights */}
-                <div className="pt-3 grid grid-cols-2 sm:grid-cols-3 gap-3 text-left border-t border-border/80">
-                  <div>
-                    <div className="text-sm font-bold text-foreground font-display">100% Offline</div>
-                    <div className="text-xs text-muted-foreground">Runs during PLDT/Globe drops</div>
+                {/* 3 Key Feature Proof Points */}
+                <div className="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-left border-t border-border/80">
+                  {/* Point 1: BIR Discount Ready */}
+                  <div className="flex items-start gap-2.5 p-2 rounded-lg bg-secondary/40 border border-border/50">
+                    <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="text-xs sm:text-sm font-bold text-foreground">BIR Discount</div>
+                      <div className="text-[11px] text-muted-foreground">Ready (RA 9994/10754)</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-sm font-bold text-foreground font-display">BIR Formula</div>
-                    <div className="text-xs text-muted-foreground">RA 9994 / RA 10754 compliant</div>
+
+                  {/* Point 2: Works Offline */}
+                  <div className="flex items-start gap-2.5 p-2 rounded-lg bg-secondary/40 border border-border/50">
+                    <WifiOff className="h-5 w-5 text-sky-500 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="text-xs sm:text-sm font-bold text-foreground">Works Offline</div>
+                      <div className="text-[11px] text-muted-foreground">No Internet? No Problem</div>
+                    </div>
                   </div>
-                  <div className="col-span-2 sm:col-span-1">
-                    <div className="text-sm font-bold text-foreground font-display">Mall Tenant RLC</div>
-                    <div className="text-xs text-muted-foreground">SM, Ayala, Robinsons TXT</div>
+
+                  {/* Point 3: Mall Reporting */}
+                  <div className="flex items-start gap-2.5 p-2 rounded-lg bg-secondary/40 border border-border/50">
+                    <Building className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="text-xs sm:text-sm font-bold text-foreground">Mall Reporting</div>
+                      <div className="text-[11px] text-muted-foreground">SM, Ayala, Robinsons</div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Hero Right: Live Terminal Preview with Real Image */}
-              <div className="lg:col-span-5">
-                <div className="rounded-xl border border-border bg-card overflow-hidden shadow-xl space-y-0 relative">
-                  {/* Decorative Terminal Header Bar */}
-                  <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/40">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                      <span className="text-[11px] font-mono text-muted-foreground ml-1.5">
-                        savore-terminal-01.local
-                      </span>
-                    </div>
-                    <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400">
-                      ● SQLite WAL Active
-                    </span>
-                  </div>
+              {/* Hero Right: Touch Terminal Mockup Display */}
+              <div className="lg:col-span-6">
+                <div className="relative rounded-2xl border border-border bg-card p-2 sm:p-3 shadow-2xl overflow-hidden group">
+                  {/* Outer Ambient Glow */}
+                  <div className="absolute -top-12 -right-12 w-48 h-48 bg-sky-500/10 rounded-full blur-2xl pointer-events-none" />
 
-                  {/* Real POS Counter Image Showcase */}
-                  <div className="relative h-56 sm:h-64 w-full bg-slate-900 overflow-hidden group">
+                  {/* High-Resolution Terminal & Printer Asset */}
+                  <div className="relative w-full h-[320px] sm:h-[400px] md:h-[440px] rounded-xl overflow-hidden bg-slate-900 border border-border/80">
                     <Image
-                      src="/images/hero-pos-terminal.jpg"
-                      alt="NexGen POS Counter Terminal Checkout"
+                      src="/images/hero-pos-terminal-display.jpg"
+                      alt="NexGen POS Touch Terminal with Table Management and Thermal Printer"
                       fill
-                      sizes="(max-width: 768px) 100vw, 500px"
-                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 1024px) 100vw, 600px"
+                      className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
                       priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     
-                    {/* Floating Overlay Badges */}
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white">
-                      <div className="bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10">
-                        <span className="text-[10px] uppercase font-semibold text-slate-400 block">Today&apos;s Net Sales</span>
-                        <span className="text-lg font-bold font-display text-sky-400 tabular-nums">₱48,920.00</span>
+                    {/* Subtle Overlay Badge */}
+                    <div className="absolute top-3 right-3 bg-black/75 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-white text-[11px] font-semibold flex items-center gap-1.5 shadow-md">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      Table Service &amp; Dine-in Mode
+                    </div>
+
+                    {/* Bottom Status Ticker */}
+                    <div className="absolute bottom-3 left-3 right-3 bg-black/80 backdrop-blur-md p-2.5 rounded-lg border border-white/10 flex items-center justify-between text-white text-xs">
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                        <span className="text-slate-300 font-medium text-[11px]">Cashier &amp; Kitchen LAN: Connected</span>
                       </div>
-                      <div className="bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-right">
-                        <span className="text-[10px] uppercase font-semibold text-slate-400 block">Non-Resettable (NGRT)</span>
-                        <span className="text-sm font-bold font-display text-amber-400 tabular-nums">₱17,413,278</span>
-                      </div>
+                      <span className="text-[11px] text-amber-400 font-bold font-mono">SQLite WAL 0.08s</span>
                     </div>
-                  </div>
-
-                  {/* Operational Status Rows */}
-                  <div className="p-4 space-y-2 bg-card">
-                    <div className="flex items-center justify-between text-xs p-2.5 rounded-md border border-border bg-background">
-                      <span className="font-medium text-foreground flex items-center gap-2">
-                        <Printer className="h-3.5 w-3.5 text-sky-500" />
-                        Kitchen Impact Printer (LAN)
-                      </span>
-                      <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
-                        ONLINE · 0.08s
-                      </span>
-                    </div>
-
-                    <div className="flex items-center justify-between text-xs p-2.5 rounded-md border border-border bg-background">
-                      <span className="font-medium text-foreground flex items-center gap-2">
-                        <Receipt className="h-3.5 w-3.5 text-amber-500" />
-                        Cashier Thermal 80mm (USB)
-                      </span>
-                      <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
-                        ONLINE · READY
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Footnote */}
-                  <div className="px-4 pb-3 text-center text-[11px] text-muted-foreground">
-                    100% resilient during brownouts &amp; broadband drops.
                   </div>
                 </div>
               </div>

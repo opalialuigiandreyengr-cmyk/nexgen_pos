@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const NAV_ITEMS = [
+  { label: "Home", href: "/" },
   { label: "Features", href: "/#features" },
   { label: "BIR & Malls", href: "/#bir-malls" },
   { label: "Hardware", href: "/#hardware" },
@@ -89,7 +90,7 @@ export function SiteHeader() {
               size="sm"
               className="bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs rounded-lg px-4 h-8.5 shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
-              Book Demo
+              Request a Demo
               <ArrowRight className="h-3.5 w-3.5 ml-1" />
             </Button>
           </a>
