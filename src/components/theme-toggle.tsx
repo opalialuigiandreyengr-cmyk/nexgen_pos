@@ -3,7 +3,6 @@
 import * as React from "react";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -15,40 +14,43 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <Button
-        variant="outline"
-        size="sm"
-        className="h-10 px-3.5 gap-2 rounded-lg border-border bg-card text-sm font-medium"
-        aria-label="Toggle theme"
-      >
-        <Sun className="h-4 w-4" />
-        <span className="hidden sm:inline">Theme</span>
-      </Button>
+      <div
+        className="w-14 h-7 rounded-full bg-slate-800/80 border border-slate-700/80 p-0.5 opacity-60"
+        aria-hidden="true"
+      />
     );
   }
 
   const isDark = resolvedTheme === "dark";
 
   return (
-    <Button
-      variant="outline"
-      size="sm"
+    <button
+      type="button"
+      role="switch"
+      aria-checked={isDark}
+      aria-label={isDark ? "Switch to day mode" : "Switch to dark mode"}
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="h-10 px-3.5 gap-2 rounded-lg border-border bg-card hover:bg-accent text-sm font-medium text-foreground transition-all cursor-pointer shadow-xs"
+      className="relative inline-flex h-7 w-14 shrink-0 cursor-pointer items-center rounded-full border border-slate-700/80 bg-slate-900/90 p-0.5 transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 shadow-inner group"
       title={isDark ? "Switch to Day Mode" : "Switch to Dark Mode"}
-      aria-label={isDark ? "Switch to Day Mode" : "Switch to Dark Mode"}
     >
-      {isDark ? (
-        <>
-          <Sun className="h-4 w-4 text-amber-400" />
-          <span className="font-semibold text-xs uppercase tracking-wider">Day</span>
-        </>
-      ) : (
-        <>
-          <Moon className="h-4 w-4 text-sky-600" />
-          <span className="font-semibold text-xs uppercase tracking-wider">Dark</span>
-        </>
-      )}
-    </Button>
+      {/* Background Icons */}
+      <div className="absolute inset-0 flex items-center justify-between px-1.5 pointer-events-none">
+        <Sun className="h-3.5 w-3.5 text-amber-400" />
+        <Moon className="h-3.5 w-3.5 text-sky-400" />
+      </div>
+
+      {/* Sliding Switch Thumb */}
+      <span
+        className={`pointer-events-none relative z-10 flex h-5 w-5 transform items-center justify-center rounded-full bg-white dark:bg-slate-100 text-slate-800 shadow-md ring-0 transition-transform duration-200 ease-in-out ${
+          isDark ? "translate-x-7" : "translate-x-0.5"
+        }`}
+      >
+        {isDark ? (
+          <Moon className="h-3 w-3 text-sky-600 fill-sky-600" />
+        ) : (
+          <Sun className="h-3 w-3 text-amber-500 fill-amber-500" />
+        )}
+      </span>
+    </button>
   );
 }
