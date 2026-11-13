@@ -160,9 +160,9 @@ export default function LandingPage() {
         {/* ==============================================================
             HERO SECTION — full-bleed background image with built-in fade
             ============================================================== */}
-        <section className="relative overflow-hidden border-b border-border bg-background flex flex-col lg:block lg:min-h-[520px]">
-          {/* Background photo: anchored to the right, fade covers left data while preserving hardware */}
-          <div className="relative order-2 lg:order-none h-60 sm:h-80 lg:h-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[75%] pointer-events-none select-none">
+        <section className="relative overflow-hidden border-b border-border bg-background flex flex-col lg:block lg:min-h-[620px] xl:min-h-[660px]">
+          {/* Background photo: anchored to the right, smoothstep ease fade */}
+          <div className="relative order-2 lg:order-none h-72 sm:h-96 lg:h-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[75%] pointer-events-none select-none">
             <Image
               src="/images/hero.png"
               alt="NexGen POS touch terminal showing table management beside a receipt printer on a cafe counter"
@@ -171,17 +171,23 @@ export default function LandingPage() {
               sizes="(max-width: 1024px) 100vw, 75vw"
               className="object-cover object-right dark:brightness-90"
             />
-            {/* Desktop: fade image into page background just enough to cover left data (stops at 40% before printer) */}
-            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-background from-0% via-background/90 via-22% to-transparent to-40%" />
-            {/* Mobile: fade image into the text block above it */}
+            {/* Desktop: photographic smoothstep fade — no harsh division line, stops cleanly before hardware */}
+            <div
+              className="hidden lg:block absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to right, var(--background) 0%, var(--background) 16%, color-mix(in srgb, var(--background) 75%, transparent) 26%, color-mix(in srgb, var(--background) 40%, transparent) 34%, color-mix(in srgb, var(--background) 12%, transparent) 40%, transparent 46%)",
+              }}
+            />
+            {/* Mobile: soft fade into the text block above it */}
             <div className="lg:hidden absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-background to-transparent" />
           </div>
 
           {/* Content */}
-          <div className="relative z-10 order-1 lg:order-none max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-6 pb-6 sm:pt-8 lg:py-12 lg:min-h-[520px] flex items-center">
-            <div className="w-full lg:max-w-[34rem] space-y-4 text-center lg:text-left">
-              {/* Badge with PH flag — dark amber in light mode for clear contrast */}
-              <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1 rounded-full border border-amber-500/35 bg-amber-500/15 text-amber-950 dark:text-amber-200 text-xs sm:text-sm font-bold shadow-xs">
+          <div className="relative z-10 order-1 lg:order-none max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-8 pb-8 sm:pt-12 sm:pb-12 lg:py-16 lg:min-h-[620px] xl:min-h-[660px] flex items-center">
+            <div className="w-full lg:max-w-[34rem] space-y-5 text-center lg:text-left">
+              {/* Badge with PH flag — dark rich amber in light mode */}
+              <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full border border-amber-600/40 bg-amber-500/15 text-[#2e1305] dark:text-amber-200 text-xs sm:text-sm font-bold shadow-xs">
                 <Image
                   src="/images/flag.png"
                   alt="Philippine flag"
@@ -189,14 +195,14 @@ export default function LandingPage() {
                   height={22}
                   className="h-5.5 w-5.5 rounded-full object-cover shadow-xs"
                 />
-                <span>Modern POS for Philippine Businesses</span>
+                <span className="text-[#2e1305] dark:text-amber-200">Modern POS for Philippine Businesses</span>
               </div>
 
-              {/* Headline — navbar navy in light mode matching header */}
-              <h1 className="font-extrabold font-display tracking-tight leading-[1.12] text-3xl sm:text-5xl lg:text-[3rem] text-[#0f172a] dark:text-white">
+              {/* Headline — navbar navy in light mode, black for growing businesses */}
+              <h1 className="font-extrabold font-display tracking-tight leading-[1.12] text-3xl sm:text-5xl lg:text-[3.1rem]">
                 <span className="block text-[#0f172a] dark:text-white">A Smarter,</span>
                 <span className="block text-[#0f172a] dark:text-sky-400">BIR-Ready POS</span>
-                <span className="relative inline-block text-[#0f172a] dark:text-white">
+                <span className="relative inline-block text-black dark:text-white">
                   for Growing Businesses
                   <svg
                     className="absolute -bottom-2 left-0 w-full h-3 text-amber-500"
@@ -215,11 +221,11 @@ export default function LandingPage() {
               </p>
 
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-0.5">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-1">
                 <a href="#demo" className="w-full sm:w-auto">
                   <Button
                     size="lg"
-                    className="w-full sm:w-auto h-11 px-7 text-sm sm:text-base font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-lg shadow-md"
+                    className="w-full sm:w-auto h-12 px-8 text-base font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-lg shadow-md"
                   >
                     Request a Demo
                     <ArrowRight className="h-4 w-4 ml-2" />
@@ -229,15 +235,15 @@ export default function LandingPage() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="w-full sm:w-auto h-11 px-7 text-sm sm:text-base font-semibold rounded-lg border-border bg-background/80 backdrop-blur-sm hover:bg-accent text-foreground"
+                    className="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-lg border-border bg-background/80 backdrop-blur-sm hover:bg-accent text-foreground"
                   >
                     View Pricing
                   </Button>
                 </a>
               </div>
 
-              {/* Proof points — subtitle is black in light mode */}
-              <ul className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-0 sm:divide-x sm:divide-border pt-1.5 text-left w-full">
+              {/* Proof points — subtitle is dark font color and NOT bold */}
+              <ul className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3.5 sm:gap-0 sm:divide-x sm:divide-border pt-2 text-left w-full">
                 {[
                   { icon: ShieldCheck, title: "BIR Discount Ready", sub: "RA 9994 / RA 10754" },
                   { icon: WifiOff, title: "Works Offline", sub: "No Internet? No Problem" },
@@ -249,7 +255,7 @@ export default function LandingPage() {
                     </span>
                     <span className="leading-tight">
                       <span className="block text-xs sm:text-sm font-bold text-foreground">{title}</span>
-                      <span className="block text-[11px] text-zinc-950 dark:text-zinc-300 font-semibold">{sub}</span>
+                      <span className="block text-[11px] text-zinc-800 dark:text-zinc-300 font-normal">{sub}</span>
                     </span>
                   </li>
                 ))}
