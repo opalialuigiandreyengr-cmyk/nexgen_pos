@@ -160,23 +160,23 @@ export default function LandingPage() {
         {/* ==============================================================
             HERO SECTION — full-bleed background image with built-in fade
             ============================================================== */}
-        <section className="relative overflow-hidden border-b border-border bg-background flex flex-col lg:block lg:min-h-[620px] xl:min-h-[660px]">
-          {/* Background photo: anchored to the right, smoothstep ease fade */}
-          <div className="relative order-2 lg:order-none h-72 sm:h-96 lg:h-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[75%] pointer-events-none select-none">
+        <section className="relative overflow-hidden border-b border-border bg-background flex flex-col lg:block lg:min-h-[640px] xl:min-h-[680px]">
+          {/* Background photo: anchored to the right, fade stops at 35% before hardware */}
+          <div className="relative order-2 lg:order-none h-72 sm:h-96 lg:h-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[72%] xl:w-[70%] pointer-events-none select-none">
             <Image
               src="/images/hero.png"
               alt="NexGen POS touch terminal showing table management beside a receipt printer on a cafe counter"
               fill
               priority
-              sizes="(max-width: 1024px) 100vw, 75vw"
+              sizes="(max-width: 1024px) 100vw, 72vw"
               className="object-cover object-right dark:brightness-90"
             />
-            {/* Desktop: photographic smoothstep fade — no harsh division line, stops cleanly before hardware */}
+            {/* Desktop: smooth fade finishes at 35% — 100% transparent before receipt printer (~44%) and monitor (~55%) */}
             <div
               className="hidden lg:block absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(to right, var(--background) 0%, var(--background) 16%, color-mix(in srgb, var(--background) 75%, transparent) 26%, color-mix(in srgb, var(--background) 40%, transparent) 34%, color-mix(in srgb, var(--background) 12%, transparent) 40%, transparent 46%)",
+                  "linear-gradient(to right, var(--background) 0%, var(--background) 14%, color-mix(in srgb, var(--background) 70%, transparent) 22%, color-mix(in srgb, var(--background) 30%, transparent) 28%, color-mix(in srgb, var(--background) 8%, transparent) 32%, transparent 35%)",
               }}
             />
             {/* Mobile: soft fade into the text block above it */}
@@ -184,8 +184,8 @@ export default function LandingPage() {
           </div>
 
           {/* Content */}
-          <div className="relative z-10 order-1 lg:order-none max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-8 pb-8 sm:pt-12 sm:pb-12 lg:py-16 lg:min-h-[620px] xl:min-h-[660px] flex items-center">
-            <div className="w-full lg:max-w-[34rem] space-y-5 text-center lg:text-left">
+          <div className="relative z-10 order-1 lg:order-none max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-8 pb-14 sm:pt-12 sm:pb-16 lg:pt-16 lg:pb-20 lg:min-h-[640px] xl:min-h-[680px] flex items-center">
+            <div className="w-full lg:max-w-[32rem] xl:max-w-[34rem] space-y-5 text-center lg:text-left lg:pr-4">
               {/* Badge with PH flag — dark yellow in light mode */}
               <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-600 dark:text-amber-300 text-xs sm:text-sm font-semibold shadow-xs">
                 <Image
@@ -198,8 +198,8 @@ export default function LandingPage() {
                 <span className="text-amber-600 dark:text-amber-300 font-bold">Modern POS for Philippine Businesses</span>
               </div>
 
-              {/* Headline — BIR-Ready POS uses same vibrant sky blue in both light and dark mode */}
-              <h1 className="font-extrabold font-display tracking-tight leading-[1.12] text-3xl sm:text-5xl lg:text-[3.1rem]">
+              {/* Headline — comfortable spacing from monitor */}
+              <h1 className="font-extrabold font-display tracking-tight leading-[1.12] text-3xl sm:text-5xl lg:text-[2.95rem] xl:text-[3.1rem]">
                 <span className="block text-[#0f172a] dark:text-white">A Smarter,</span>
                 <span className="block text-sky-500 dark:text-sky-400">BIR-Ready POS</span>
                 <span className="relative inline-block text-black dark:text-white">
@@ -242,24 +242,29 @@ export default function LandingPage() {
                 </a>
               </div>
 
-              {/* Proof points — subtitle is dark font color and NOT bold */}
-              <ul className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3.5 sm:gap-0 sm:divide-x sm:divide-border pt-2 text-left w-full">
-                {[
-                  { icon: ShieldCheck, title: "BIR Discount Ready", sub: "RA 9994 / RA 10754" },
-                  { icon: WifiOff, title: "Works Offline", sub: "No Internet? No Problem" },
-                  { icon: BarChart3, title: "Mall Reporting", sub: "Concessionaire Ready" },
-                ].map(({ icon: Icon, title, sub }) => (
-                  <li key={title} className="flex items-center gap-2.5 sm:flex-1 min-w-0 sm:px-3 first:sm:pl-0 last:sm:pr-0">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-600/70 bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white shadow-sm">
-                      <Icon className="h-4 w-4" aria-hidden="true" />
-                    </span>
-                    <span className="leading-tight">
-                      <span className="block text-xs sm:text-sm font-bold text-foreground">{title}</span>
-                      <span className="block text-[11px] text-zinc-800 dark:text-zinc-300 font-normal">{sub}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              {/* Feature badges — spacious cards with ample room for Mall Reporting */}
+              <div className="pt-3 pb-2 w-full lg:w-[35rem] xl:w-[37rem]">
+                <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left w-full">
+                  {[
+                    { icon: ShieldCheck, title: "BIR Discount", sub: "Ready (RA 9994/10754)" },
+                    { icon: WifiOff, title: "Works Offline", sub: "No Internet? No Problem" },
+                    { icon: BarChart3, title: "Mall Reporting", sub: "Concessionaire Ready" },
+                  ].map(({ icon: Icon, title, sub }) => (
+                    <li
+                      key={title}
+                      className="flex items-center gap-2.5 p-2.5 rounded-xl border border-border/80 bg-background/85 backdrop-blur-xs shadow-xs min-w-0"
+                    >
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-600/70 bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white shadow-sm">
+                        <Icon className="h-4 w-4" aria-hidden="true" />
+                      </span>
+                      <span className="leading-tight min-w-0">
+                        <span className="block text-xs sm:text-sm font-bold text-foreground truncate">{title}</span>
+                        <span className="block text-[11px] text-zinc-800 dark:text-zinc-300 font-normal truncate">{sub}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </section>
