@@ -224,11 +224,11 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              {/* Hero Right: Live Interactive Terminal Card */}
+              {/* Hero Right: Live Terminal Preview with Real Image */}
               <div className="lg:col-span-5">
-                <div className="rounded-xl border border-border bg-card p-5 sm:p-6 shadow-lg space-y-4 relative overflow-hidden">
-                  {/* Decorative Header Bar */}
-                  <div className="flex items-center justify-between pb-3 border-b border-border">
+                <div className="rounded-xl border border-border bg-card overflow-hidden shadow-xl space-y-0 relative">
+                  {/* Decorative Terminal Header Bar */}
+                  <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/40">
                     <div className="flex items-center gap-2">
                       <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                       <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
@@ -242,35 +242,33 @@ export default function LandingPage() {
                     </span>
                   </div>
 
-                  {/* Terminal Stats Box */}
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="rounded-lg border border-border/70 bg-secondary/50 p-3.5">
-                      <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider block mb-0.5">
-                        Today&apos;s Net Sales
-                      </span>
-                      <span className="text-xl sm:text-2xl font-bold font-display text-sky-600 dark:text-sky-400 tabular-nums">
-                        ₱48,920.00
-                      </span>
-                      <span className="text-[11px] text-muted-foreground block mt-0.5">
-                        142 Settled Orders
-                      </span>
-                    </div>
-
-                    <div className="rounded-lg border border-border/70 bg-secondary/50 p-3.5">
-                      <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider block mb-0.5">
-                        Non-Resettable (NGRT)
-                      </span>
-                      <span className="text-lg sm:text-xl font-bold font-display text-amber-600 dark:text-amber-400 tabular-nums">
-                        ₱17,413,278
-                      </span>
-                      <span className="text-[11px] text-muted-foreground block mt-0.5">
-                        Z-Reading #179
-                      </span>
+                  {/* Real POS Counter Image Showcase */}
+                  <div className="relative h-56 sm:h-64 w-full bg-slate-900 overflow-hidden group">
+                    <Image
+                      src="/images/hero-pos-terminal.jpg"
+                      alt="NexGen POS Counter Terminal Checkout"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 500px"
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    
+                    {/* Floating Overlay Badges */}
+                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white">
+                      <div className="bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10">
+                        <span className="text-[10px] uppercase font-semibold text-slate-400 block">Today&apos;s Net Sales</span>
+                        <span className="text-lg font-bold font-display text-sky-400 tabular-nums">₱48,920.00</span>
+                      </div>
+                      <div className="bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-right">
+                        <span className="text-[10px] uppercase font-semibold text-slate-400 block">Non-Resettable (NGRT)</span>
+                        <span className="text-sm font-bold font-display text-amber-400 tabular-nums">₱17,413,278</span>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Operational Status Preview */}
-                  <div className="space-y-2">
+                  {/* Operational Status Rows */}
+                  <div className="p-4 space-y-2 bg-card">
                     <div className="flex items-center justify-between text-xs p-2.5 rounded-md border border-border bg-background">
                       <span className="font-medium text-foreground flex items-center gap-2">
                         <Printer className="h-3.5 w-3.5 text-sky-500" />
@@ -290,21 +288,11 @@ export default function LandingPage() {
                         ONLINE · READY
                       </span>
                     </div>
-
-                    <div className="flex items-center justify-between text-xs p-2.5 rounded-md border border-border bg-background">
-                      <span className="font-medium text-foreground flex items-center gap-2">
-                        <Building className="h-3.5 w-3.5 text-slate-400" />
-                        Robinsons Mall RLC Export
-                      </span>
-                      <span className="text-[11px] font-bold text-sky-600 dark:text-sky-400">
-                        AUTO-GENERATED
-                      </span>
-                    </div>
                   </div>
 
                   {/* Footnote */}
-                  <div className="text-center text-[11px] text-muted-foreground">
-                    Zero latency during brownouts &amp; broadband drops.
+                  <div className="px-4 pb-3 text-center text-[11px] text-muted-foreground">
+                    100% resilient during brownouts &amp; broadband drops.
                   </div>
                 </div>
               </div>
@@ -598,6 +586,94 @@ export default function LandingPage() {
                   </p>
                 </Card>
               ))}
+            </div>
+
+            {/* Hardware Showcase Banner with Real Photo */}
+            <div className="rounded-xl border border-border bg-card overflow-hidden shadow-xs grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
+              <div className="relative h-60 md:h-full md:col-span-5 min-h-[240px]">
+                <Image
+                  src="/images/hardware-counter.jpg"
+                  alt="Point of sale hardware setup with receipt printer and touch screen"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 450px"
+                  className="object-cover object-center"
+                />
+              </div>
+              <div className="p-6 sm:p-8 md:col-span-7 space-y-3">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+                  No Proprietary Lock-In
+                </span>
+                <h3 className="text-xl font-bold font-display text-foreground">
+                  Works With the Equipment You Already Own.
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Unlike cloud tablet POS systems that force you to buy expensive proprietary docks, NexGen works seamlessly on standard Windows laptops, all-in-one touch terminals, USB thermal printers, and electronic RJ11 cash drawers.
+                </p>
+                <div className="flex flex-wrap gap-2 pt-1 text-xs text-foreground font-medium">
+                  <span className="px-2.5 py-1 rounded bg-secondary border border-border">Epson TM-T82 / TM-T20</span>
+                  <span className="px-2.5 py-1 rounded bg-secondary border border-border">Xprinter / Rongta 80mm</span>
+                  <span className="px-2.5 py-1 rounded bg-secondary border border-border">Epson TM-U220 Dot Matrix</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ==============================================================
+            MULTI-STORE OWNER TELEMETRY SHOWCASE
+            ============================================================== */}
+        <section className="py-16 sm:py-20 border-b border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-md grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
+              <div className="p-8 sm:p-10 lg:col-span-7 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-600 dark:text-sky-400 text-xs font-semibold">
+                  <Building className="h-3.5 w-3.5" />
+                  <span>Centralized Multi-Location Control</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold font-display tracking-tight text-foreground">
+                  Check Your Store Sales From Your Phone.
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Whether you manage one flagship branch or ten mall kiosks, NexGen automatically pushes compact daily sales summaries and encrypted database archives to your private Supabase cloud portal.
+                </p>
+                <div className="grid grid-cols-2 gap-3 pt-2">
+                  <div className="p-3 rounded-lg border border-border bg-secondary/50">
+                    <div className="font-bold text-sm text-foreground">Live Shift Totals</div>
+                    <div className="text-xs text-muted-foreground">Settled cash, card &amp; e-wallets</div>
+                  </div>
+                  <div className="p-3 rounded-lg border border-border bg-secondary/50">
+                    <div className="font-bold text-sm text-foreground">15-Day Cloud Roll</div>
+                    <div className="text-xs text-muted-foreground">Automated database backups</div>
+                  </div>
+                </div>
+                <div className="pt-2">
+                  <Link href="/portal-login">
+                    <Button className="h-10 text-sm font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-lg shadow-sm">
+                      Explore Owner Fleet Portal
+                      <ArrowRight className="h-4 w-4 ml-1.5" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="relative h-72 sm:h-96 lg:h-full lg:min-h-[380px] lg:col-span-5 bg-slate-900 overflow-hidden">
+                <Image
+                  src="/images/owner-mobile-app.jpg"
+                  alt="Multi-Store Owner Monitoring Sales on Mobile"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 500px"
+                  className="object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-black/80 via-black/30 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-md p-3.5 rounded-xl border border-white/10 text-white">
+                  <div className="flex items-center justify-between text-xs font-semibold mb-1">
+                    <span className="text-slate-300">Fleet Combined Net Sales</span>
+                    <span className="text-emerald-400 font-bold">● Live Sync</span>
+                  </div>
+                  <div className="text-xl font-bold font-display text-sky-400 tabular-nums">₱174,850.00</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">3 Branches Active · 100% Data Protection</div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
