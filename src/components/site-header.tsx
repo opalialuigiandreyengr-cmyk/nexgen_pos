@@ -8,11 +8,11 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const NAV_ITEMS = [
-  { label: "Features", href: "#features" },
-  { label: "BIR & Malls", href: "#bir-malls" },
-  { label: "Hardware", href: "#hardware" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Features", href: "/#features" },
+  { label: "BIR & Malls", href: "/#bir-malls" },
+  { label: "Hardware", href: "/#hardware" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 export function SiteHeader() {

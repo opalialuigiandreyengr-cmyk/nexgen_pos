@@ -128,10 +128,18 @@ export function DemoForm() {
         </p>
       )}
 
-      <Button type="submit" className="w-full" disabled={loading}>
-        {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+      <Button type="submit" className="w-full h-10 text-sm font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-lg shadow-sm" disabled={loading}>
+        {loading && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
         Request Free Live Demo
       </Button>
+
+      <p className="text-[11px] text-center text-muted-foreground">
+        By scheduling, you agree to our{" "}
+        <a href="/terms" className="text-sky-500 hover:underline" target="_blank" rel="noreferrer">
+          Terms and Conditions
+        </a>
+        .
+      </p>
     </form>
   );
 }

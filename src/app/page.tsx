@@ -17,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { DemoForm } from "@/components/demo-form";
+import { PricingSection } from "@/components/pricing-section";
 import { SiteHeader } from "@/components/site-header";
 
 const PILLARS = [
@@ -497,6 +498,72 @@ export default function LandingPage() {
                 </div>
               </div>
             </div>
+
+            {/* Visual BIR 80mm Official Receipt Mockup */}
+            <div className="pt-8 border-t border-border/80">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div className="lg:col-span-5">
+                  <div className="rounded-xl border border-dashed border-border bg-card p-5 font-mono text-xs space-y-2 shadow-sm max-w-sm mx-auto lg:mx-0">
+                    <div className="text-center pb-2.5 border-b border-dashed border-border space-y-0.5">
+                      <div className="font-bold text-foreground text-sm">SAVORE BISTRO &amp; CAFE</div>
+                      <div className="text-[10px] text-muted-foreground">TIN: 432-891-002-000 · MIN: 240819283</div>
+                      <div className="text-[10px] text-amber-600 dark:text-amber-400 font-semibold">OFFICIAL BIR CASH INVOICE</div>
+                    </div>
+                    <div className="py-2 border-b border-dashed border-border space-y-1 text-foreground">
+                      <div className="flex justify-between">
+                        <span>1x Angus Beef Burger</span>
+                        <span className="tabular-nums font-semibold">₱280.00</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>1x Brewed Iced Tea</span>
+                        <span className="tabular-nums font-semibold">₱95.00</span>
+                      </div>
+                    </div>
+                    <div className="py-1 space-y-1 text-muted-foreground">
+                      <div className="flex justify-between">
+                        <span>Gross Sales:</span>
+                        <span className="tabular-nums">₱375.00</span>
+                      </div>
+                      <div className="flex justify-between text-amber-600 dark:text-amber-400">
+                        <span>Less 12% VAT Exemption:</span>
+                        <span className="tabular-nums font-medium">-₱40.18</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Net VAT-Exempt Amount:</span>
+                        <span className="tabular-nums">₱334.82</span>
+                      </div>
+                      <div className="flex justify-between text-emerald-600 dark:text-emerald-400">
+                        <span>Less 20% SC/PWD Discount:</span>
+                        <span className="tabular-nums font-medium">-₱66.96</span>
+                      </div>
+                    </div>
+                    <div className="pt-2 border-t border-dashed border-border flex justify-between font-bold text-foreground text-sm">
+                      <span>TOTAL AMOUNT DUE:</span>
+                      <span className="text-sky-600 dark:text-sky-400 tabular-nums text-base">₱267.86</span>
+                    </div>
+                    <div className="pt-2 text-[10px] text-muted-foreground space-y-0.5 border-t border-dashed border-border">
+                      <div>OSCA/PWD ID: 2026-TAC-8912 (J. DELA CRUZ)</div>
+                      <div className="text-[9px] text-slate-500 font-mono">NGRT: ₱17,413,278.50 · Z-READING #179</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-7 space-y-3">
+                  <span className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+                    Audit-Proof Receipt Output
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-bold font-display text-foreground">
+                    Zero Math Errors for Your Cashiers.
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Under BIR Revenue Regulations, applying the 20% discount directly on a VAT-inclusive amount is a punishable violation that leads to audit penalties. NexGen automates the exact statutory reduction: stripping the 12% VAT first, then applying the 20% statutory discount.
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Both physical customer receipts and electronic journals (eJournal) preserve the Non-Resettable Grand Total (NGRT) and sequential Z-reading counter automatically.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -536,149 +603,9 @@ export default function LandingPage() {
         </section>
 
         {/* ==============================================================
-            SECTION 5: PHILIPPINE PESO PRICING
+            SECTION 5: PHILIPPINE PESO PRICING (WITH ANNUAL TOGGLE)
             ============================================================== */}
-        <section id="pricing" className="scroll-mt-20 py-16 sm:py-20 border-b border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="text-center max-w-2xl mx-auto space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
-                Transparent Philippine Pricing
-              </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display tracking-tight text-foreground">
-                Affordable Plans With No Hidden Fees.
-              </h2>
-              <p className="text-sm sm:text-base text-muted-foreground">
-                Transparent subscriptions in Philippine Pesos (PHP). All plans include our 100% offline engine.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-              {/* Plan 1: Retail / Starter */}
-              <div className="rounded-xl border border-border bg-card p-6 sm:p-7 flex flex-col justify-between shadow-xs space-y-6">
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-bold font-display text-foreground">Starter Counter</h3>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      For retail kiosks, boutiques, bakeries, and quick counters.
-                    </p>
-                  </div>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-3xl sm:text-4xl font-bold font-display text-foreground">₱1,499</span>
-                    <span className="text-muted-foreground text-xs font-medium">/ month</span>
-                  </div>
-                  <ul className="space-y-2.5 text-xs sm:text-sm text-foreground">
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                      <span>100% Offline SQLite engine</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                      <span>7 BIR-compliant sales books</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                      <span>Thermal receipt printing (USB)</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                      <span>Daily cloud database backup</span>
-                    </li>
-                  </ul>
-                </div>
-                <a href="#demo">
-                  <Button variant="outline" className="w-full h-9.5 text-xs sm:text-sm font-semibold rounded-lg">
-                    Get Started
-                  </Button>
-                </a>
-              </div>
-
-              {/* Plan 2: Pro Restaurant (Featured) */}
-              <div className="rounded-xl border-2 border-sky-500 bg-card p-6 sm:p-7 flex flex-col justify-between shadow-lg space-y-6 relative">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-sky-600 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-xs">
-                  Most Popular For Dining
-                </div>
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-bold font-display text-foreground">Pro Restaurant</h3>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      For cafes, dine-in restaurants, bars, and food park tenants.
-                    </p>
-                  </div>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-3xl sm:text-4xl font-bold font-display text-sky-600 dark:text-sky-400">₱2,499</span>
-                    <span className="text-muted-foreground text-xs font-medium">/ month</span>
-                  </div>
-                  <ul className="space-y-2.5 text-xs sm:text-sm text-foreground">
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                      <span>Everything in Starter plan</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                      <span>Table layout &amp; bill split management</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                      <span>Kitchen dot-matrix impact routing</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                      <span>Mall Tenant RLC (SM, Robinsons, Ayala)</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                      <span>Raw ingredient recipe inventory</span>
-                    </li>
-                  </ul>
-                </div>
-                <a href="#demo">
-                  <Button className="w-full h-9.5 text-xs sm:text-sm font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-lg shadow-md">
-                    Book Free Demo
-                  </Button>
-                </a>
-              </div>
-
-              {/* Plan 3: Multi-Branch Fleet */}
-              <div className="rounded-xl border border-border bg-card p-6 sm:p-7 flex flex-col justify-between shadow-xs space-y-6">
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-bold font-display text-foreground">Multi-Branch Fleet</h3>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      For restaurant chains, franchise operators, and retail fleets.
-                    </p>
-                  </div>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-3xl sm:text-4xl font-bold font-display text-foreground">Custom</span>
-                    <span className="text-muted-foreground text-xs font-medium">volume pricing</span>
-                  </div>
-                  <ul className="space-y-2.5 text-xs sm:text-sm text-foreground">
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                      <span>Multi-store Owner Cloud Portal</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                      <span>Centralized menu &amp; price sync</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                      <span>Consolidated executive reporting</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                      <span>Dedicated technical onboarding</span>
-                    </li>
-                  </ul>
-                </div>
-                <a href="#demo">
-                  <Button variant="outline" className="w-full h-9.5 text-xs sm:text-sm font-semibold rounded-lg">
-                    Contact Sales
-                  </Button>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <PricingSection />
 
         {/* ==============================================================
             SECTION 6: FAQ
@@ -769,21 +696,32 @@ export default function LandingPage() {
             </div>
 
             <div>
-              <h4 className="font-semibold text-white text-sm mb-2.5 font-display">Owner Access</h4>
+              <h4 className="font-semibold text-white text-sm mb-2.5 font-display">Owner &amp; Legal</h4>
               <ul className="space-y-1.5 text-xs sm:text-sm text-slate-400">
                 <li>
                   <Link href="/portal-login" className="text-sky-400 hover:text-sky-300 font-medium">
                     Owner Fleet Portal →
                   </Link>
                 </li>
-                <li><span className="text-xs text-slate-500">Live multi-branch sales monitoring</span></li>
+                <li>
+                  <Link href="/terms" className="hover:text-white transition-colors">
+                    Terms &amp; Conditions
+                  </Link>
+                </li>
+                <li><span className="text-xs text-slate-500">R.A. 9994 / 10754 Compliant</span></li>
               </ul>
             </div>
           </div>
 
           <div className="pt-6 border-t border-slate-800 text-[11px] text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p>© 2026 NexGen POS. All rights reserved.</p>
-            <p>Designed strictly under Republic Acts 9994, 10754, and BIR Revenue Regulations.</p>
+            <div className="flex items-center gap-4">
+              <Link href="/terms" className="text-slate-400 hover:text-white transition-colors underline">
+                Terms &amp; Conditions
+              </Link>
+              <span>·</span>
+              <p>Designed strictly under Republic Acts 9994, 10754, and BIR Revenue Regulations.</p>
+            </div>
           </div>
         </div>
       </footer>
