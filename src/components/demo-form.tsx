@@ -71,22 +71,30 @@ export function DemoForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <Label htmlFor="full_name">Your Name</Label>
-          <Input id="full_name" name="full_name" placeholder="Juan Dela Cruz" required />
+          <Input id="full_name" name="full_name" placeholder="Juan Dela Cruz" autoComplete="name" required />
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="business_name">Restaurant / Business Name</Label>
-          <Input id="business_name" name="business_name" placeholder="Savore Kitchen" required />
+          <Input id="business_name" name="business_name" placeholder="Savore Kitchen" autoComplete="organization" required />
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <Label htmlFor="contact_number">Mobile / Viber</Label>
-          <Input id="contact_number" name="contact_number" placeholder="0917 123 4567" required />
+          <Input
+            id="contact_number"
+            name="contact_number"
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            placeholder="0917 123 4567"
+            required
+          />
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="email">Email (Optional)</Label>
-          <Input id="email" name="email" type="email" placeholder="owner@savore.ph" />
+          <Input id="email" name="email" type="email" autoComplete="email" placeholder="owner@savore.ph" />
         </div>
       </div>
 

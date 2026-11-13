@@ -4,21 +4,15 @@ import {
   ArrowRight,
   Building,
   CheckCircle2,
-  Clock,
   CloudCheck,
   FileCheck,
-  HardDrive,
   HelpCircle,
   Laptop,
-  Percent,
   Printer,
   Receipt,
   Scale,
   ShieldCheck,
-  Store,
-  UtensilsCrossed,
   WifiOff,
-  Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -320,7 +314,7 @@ export default function LandingPage() {
         {/* ==============================================================
             SECTION 1: CORE PH PILLARS
             ============================================================== */}
-        <section id="features" className="py-16 sm:py-20 border-b border-border">
+        <section id="features" className="scroll-mt-20 py-16 sm:py-20 border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             {/* Section Header */}
             <div className="text-center max-w-2xl mx-auto space-y-3">
@@ -436,7 +430,7 @@ export default function LandingPage() {
         {/* ==============================================================
             SECTION 3: BIR COMPLIANCE & MALL TENANT MODULE
             ============================================================== */}
-        <section id="bir-malls" className="py-16 sm:py-20 border-b border-border">
+        <section id="bir-malls" className="scroll-mt-20 py-16 sm:py-20 border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               {/* Left Column: Statutory Formula Explanation */}
@@ -509,7 +503,7 @@ export default function LandingPage() {
         {/* ==============================================================
             SECTION 4: HARDWARE COMPATIBILITY
             ============================================================== */}
-        <section id="hardware" className="py-16 sm:py-20 bg-secondary/30 border-b border-border">
+        <section id="hardware" className="scroll-mt-20 py-16 sm:py-20 bg-secondary/30 border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <span className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
@@ -544,7 +538,7 @@ export default function LandingPage() {
         {/* ==============================================================
             SECTION 5: PHILIPPINE PESO PRICING
             ============================================================== */}
-        <section id="pricing" className="py-16 sm:py-20 border-b border-border">
+        <section id="pricing" className="scroll-mt-20 py-16 sm:py-20 border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <span className="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
@@ -689,7 +683,7 @@ export default function LandingPage() {
         {/* ==============================================================
             SECTION 6: FAQ
             ============================================================== */}
-        <section id="faq" className="py-16 sm:py-20 bg-secondary/30 border-b border-border">
+        <section id="faq" className="scroll-mt-20 py-16 sm:py-20 bg-secondary/30 border-b border-border">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
             <div className="text-center space-y-3">
               <span className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
@@ -722,7 +716,7 @@ export default function LandingPage() {
         {/* ==============================================================
             SECTION 7: INTERACTIVE DEMO BOOKING FORM
             ============================================================== */}
-        <section id="demo" className="py-16 sm:py-20">
+        <section id="demo" className="scroll-mt-20 py-16 sm:py-20">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             <div className="text-center space-y-3">
               <span className="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
