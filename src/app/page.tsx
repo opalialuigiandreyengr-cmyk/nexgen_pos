@@ -186,8 +186,8 @@ export default function LandingPage() {
           {/* Content */}
           <div className="relative z-10 order-1 lg:order-none max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-8 pb-8 sm:pt-12 sm:pb-12 lg:py-16 lg:min-h-[620px] xl:min-h-[660px] flex items-center">
             <div className="w-full lg:max-w-[34rem] space-y-5 text-center lg:text-left">
-              {/* Badge with PH flag — dark rich amber in light mode */}
-              <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full border border-amber-600/40 bg-amber-500/15 text-[#2e1305] dark:text-amber-200 text-xs sm:text-sm font-bold shadow-xs">
+              {/* Badge with PH flag — dark yellow in light mode */}
+              <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-600 dark:text-amber-300 text-xs sm:text-sm font-semibold shadow-xs">
                 <Image
                   src="/images/flag.png"
                   alt="Philippine flag"
@@ -195,13 +195,13 @@ export default function LandingPage() {
                   height={22}
                   className="h-5.5 w-5.5 rounded-full object-cover shadow-xs"
                 />
-                <span className="text-[#2e1305] dark:text-amber-200">Modern POS for Philippine Businesses</span>
+                <span className="text-amber-600 dark:text-amber-300 font-bold">Modern POS for Philippine Businesses</span>
               </div>
 
-              {/* Headline — navbar navy in light mode, black for growing businesses */}
+              {/* Headline — BIR-Ready POS uses same vibrant sky blue in both light and dark mode */}
               <h1 className="font-extrabold font-display tracking-tight leading-[1.12] text-3xl sm:text-5xl lg:text-[3.1rem]">
                 <span className="block text-[#0f172a] dark:text-white">A Smarter,</span>
-                <span className="block text-[#0f172a] dark:text-sky-400">BIR-Ready POS</span>
+                <span className="block text-sky-500 dark:text-sky-400">BIR-Ready POS</span>
                 <span className="relative inline-block text-black dark:text-white">
                   for Growing Businesses
                   <svg
