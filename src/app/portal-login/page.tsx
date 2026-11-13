@@ -58,10 +58,10 @@ export default function PortalLoginPage() {
           <ArrowLeft className="h-3.5 w-3.5" /> Back to Landing Page
         </Link>
 
-        <Card className="border-primary/30 shadow-xl brand-glow">
+        <Card className="border-border shadow-xl">
           <CardHeader className="space-y-2">
             <div className="flex items-center justify-between">
-              <div className="relative h-10 w-10 rounded-lg overflow-hidden border border-primary/40 bg-card">
+              <div className="relative h-10 w-10 rounded-lg overflow-hidden border border-border bg-card">
                 <Image src="/box_logo.png" alt="NexGen Logo" fill sizes="40px" className="object-contain p-0.5" priority />
               </div>
               <div className="h-8 w-8 rounded-md border border-border bg-secondary flex items-center justify-center text-primary">
@@ -103,7 +103,11 @@ export default function PortalLoginPage() {
                   {error}
                 </p>
               )}
-              <Button type="submit" className="w-full brand-gradient text-white font-display font-bold" disabled={loading}>
+              <Button
+                type="submit"
+                className="w-full h-10 text-sm font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-lg shadow-md transition-all hover:scale-[1.01] active:scale-[0.99]"
+                disabled={loading}
+              >
                 {loading && <Loader2 className="h-4 w-4 animate-spin" />}
                 Sign In to Fleet Portal
               </Button>
