@@ -161,22 +161,22 @@ export default function LandingPage() {
             HERO SECTION — full-bleed background image with built-in fade
             ============================================================== */}
         <section className="relative overflow-hidden border-b border-border bg-background flex flex-col lg:block lg:min-h-[640px] xl:min-h-[680px]">
-          {/* Background photo: anchored to the right, fade stops at 35% before hardware */}
-          <div className="relative order-2 lg:order-none h-72 sm:h-96 lg:h-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[72%] xl:w-[70%] pointer-events-none select-none">
+          {/* Background photo: anchored to the right, fade finishes early (at 22%) so printer is 100% opaque */}
+          <div className="relative order-2 lg:order-none h-72 sm:h-96 lg:h-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[70%] xl:w-[68%] pointer-events-none select-none">
             <Image
               src="/images/hero.png"
               alt="NexGen POS touch terminal showing table management beside a receipt printer on a cafe counter"
               fill
               priority
-              sizes="(max-width: 1024px) 100vw, 72vw"
+              sizes="(max-width: 1024px) 100vw, 70vw"
               className="object-cover object-right dark:brightness-90"
             />
-            {/* Desktop: smooth fade finishes at 35% — 100% transparent before receipt printer (~44%) and monitor (~55%) */}
+            {/* Desktop: quick smooth fade ending at 22% — printer (~45%) and monitor (~55%) have 0% overlay */}
             <div
               className="hidden lg:block absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(to right, var(--background) 0%, var(--background) 14%, color-mix(in srgb, var(--background) 70%, transparent) 22%, color-mix(in srgb, var(--background) 30%, transparent) 28%, color-mix(in srgb, var(--background) 8%, transparent) 32%, transparent 35%)",
+                  "linear-gradient(to right, var(--background) 0%, var(--background) 6%, color-mix(in srgb, var(--background) 60%, transparent) 12%, color-mix(in srgb, var(--background) 20%, transparent) 17%, color-mix(in srgb, var(--background) 5%, transparent) 20%, transparent 22%)",
               }}
             />
             {/* Mobile: soft fade into the text block above it */}
@@ -185,7 +185,7 @@ export default function LandingPage() {
 
           {/* Content */}
           <div className="relative z-10 order-1 lg:order-none max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-8 pb-14 sm:pt-12 sm:pb-16 lg:pt-16 lg:pb-20 lg:min-h-[640px] xl:min-h-[680px] flex items-center">
-            <div className="w-full lg:max-w-[32rem] xl:max-w-[34rem] space-y-5 text-center lg:text-left lg:pr-4">
+            <div className="w-full lg:max-w-[31.5rem] xl:max-w-[33rem] space-y-5 text-center lg:text-left lg:pr-2">
               {/* Badge with PH flag — dark yellow in light mode */}
               <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-600 dark:text-amber-300 text-xs sm:text-sm font-semibold shadow-xs">
                 <Image
@@ -242,28 +242,42 @@ export default function LandingPage() {
                 </a>
               </div>
 
-              {/* Feature badges — spacious cards with ample room for Mall Reporting */}
-              <div className="pt-3 pb-2 w-full lg:w-[35rem] xl:w-[37rem]">
-                <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left w-full">
-                  {[
-                    { icon: ShieldCheck, title: "BIR Discount", sub: "Ready (RA 9994/10754)" },
-                    { icon: WifiOff, title: "Works Offline", sub: "No Internet? No Problem" },
-                    { icon: BarChart3, title: "Mall Reporting", sub: "Concessionaire Ready" },
-                  ].map(({ icon: Icon, title, sub }) => (
-                    <li
-                      key={title}
-                      className="flex items-center gap-2.5 p-2.5 rounded-xl border border-border/80 bg-background/85 backdrop-blur-xs shadow-xs min-w-0"
-                    >
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-600/70 bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white shadow-sm">
-                        <Icon className="h-4 w-4" aria-hidden="true" />
-                      </span>
-                      <span className="leading-tight min-w-0">
-                        <span className="block text-xs sm:text-sm font-bold text-foreground truncate">{title}</span>
-                        <span className="block text-[11px] text-zinc-800 dark:text-zinc-300 font-normal truncate">{sub}</span>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+              {/* Feature badges — single unified pill bar matching mockup, clear of printer */}
+              <div className="pt-3 pb-2 w-full max-w-full lg:max-w-[31rem]">
+                <div className="inline-flex flex-col sm:flex-row items-stretch sm:items-center rounded-2xl border border-border/80 bg-background/90 backdrop-blur-md p-2 sm:p-2.5 shadow-xs sm:divide-x sm:divide-border w-full gap-2.5 sm:gap-0">
+                  {/* Item 1: BIR Discount Ready */}
+                  <div className="flex items-center gap-2.5 px-3 first:pl-1 sm:flex-1 min-w-0">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0f172a] text-white shadow-xs">
+                      <ShieldCheck className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    <span className="leading-tight min-w-0">
+                      <span className="block text-xs font-bold text-foreground">BIR Discount Ready</span>
+                      <span className="block text-[11px] text-zinc-700 dark:text-zinc-300 font-normal">RA 9994 / RA 10754</span>
+                    </span>
+                  </div>
+
+                  {/* Item 2: Works Offline — wraps description without truncating */}
+                  <div className="flex items-center gap-2.5 px-3 sm:flex-1 min-w-0">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0f172a] text-white shadow-xs">
+                      <WifiOff className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    <span className="leading-tight min-w-0">
+                      <span className="block text-xs font-bold text-foreground">Works Offline</span>
+                      <span className="block text-[11px] text-zinc-700 dark:text-zinc-300 font-normal leading-snug">No Internet? No Problem</span>
+                    </span>
+                  </div>
+
+                  {/* Item 3: Mall Reporting — clear of product image */}
+                  <div className="flex items-center gap-2.5 px-3 last:pr-1 sm:flex-1 min-w-0">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0f172a] text-white shadow-xs">
+                      <BarChart3 className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    <span className="leading-tight min-w-0">
+                      <span className="block text-xs font-bold text-foreground">Mall Reporting</span>
+                      <span className="block text-[11px] text-zinc-700 dark:text-zinc-300 font-normal">Concessionaire Ready</span>
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
