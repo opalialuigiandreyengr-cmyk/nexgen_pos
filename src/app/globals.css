@@ -1,59 +1,72 @@
 @import "tailwindcss";
 
 :root {
-  /* NexGen POS Light Theme - Clean White & Electric Blue */
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  /* Day / Light Theme */
+  --background: #ffffff;
+  --foreground: #09090b;
   --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card-foreground: #09090b;
   --popover: #ffffff;
-  --popover-foreground: #0f172a;
-  
-  /* Brand Primary: Electric Azure Blue */
+  --popover-foreground: #09090b;
+
+  /* Brand Azure Blue */
   --primary: #0284c7;
   --primary-foreground: #ffffff;
-  
-  /* Slate & Accent surfaces */
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0f172a;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #e0f2fe;
-  --accent-foreground: #0369a1;
-  --destructive: #ef4444;
+
+  /* Warm Golden Amber (from POS --accent-secondary: #D97706) */
+  --brand-yellow: #d97706;
+  --brand-yellow-foreground: #ffffff;
+
+  /* Surfaces & Borders */
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
+  --muted: #f4f4f5;
+  --muted-foreground: #52525b;
+  --accent: #f4f4f5;
+  --accent-foreground: #0284c7;
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
   --ring: #0284c7;
-  --radius: 0.6rem;
+  --radius: 0.75rem;
+
+  /* POS Navbar Header Gradient */
+  --pos-navbar-bg: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
 }
 
 .dark {
-  /* NexGen POS Dark Theme - Deep Midnight Navy & Glowing Electric Cyan */
-  --background: #070e20;
-  --foreground: #f8fafc;
-  --card: #0d172e;
-  --card-foreground: #f8fafc;
-  --popover: #0d172e;
-  --popover-foreground: #f8fafc;
-  
-  /* Brand Primary: Vibrant Cyan / Sky Blue */
-  --primary: #38bdf8;
-  --primary-foreground: #082f49;
-  
-  /* Midnight Navy surfaces */
-  --secondary: #132042;
-  --secondary-foreground: #f8fafc;
-  --muted: #132042;
-  --muted-foreground: #94a3b8;
-  --accent: #1e335e;
-  --accent-foreground: #38bdf8;
-  --destructive: #f87171;
+  /* Vercel True Dark Theme (Pitch Black #000000) */
+  --background: #000000;
+  --foreground: #ededed;
+  --card: #0a0a0a;
+  --card-foreground: #ededed;
+  --popover: #111111;
+  --popover-foreground: #ededed;
+
+  /* Electric Sky Cyan Primary */
+  --primary: #0ea5e9;
+  --primary-foreground: #021e35;
+
+  /* Warm Golden Amber for Dark Mode */
+  --brand-yellow: #f59e0b;
+  --brand-yellow-foreground: #000000;
+
+  /* Deep Black Surfaces & Hairline Borders */
+  --secondary: #141414;
+  --secondary-foreground: #ededed;
+  --muted: #141414;
+  --muted-foreground: #a1a1aa;
+  --accent: #181818;
+  --accent-foreground: #0ea5e9;
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #1e2f52;
-  --input: #1e2f52;
-  --ring: #38bdf8;
-  --radius: 0.6rem;
+  --border: #222222;
+  --input: #262626;
+  --ring: #0ea5e9;
+  --radius: 0.75rem;
+
+  --pos-navbar-bg: linear-gradient(135deg, #0f172a 0%, #020617 100%);
 }
 
 @theme inline {
@@ -63,6 +76,8 @@
   --color-card-foreground: var(--card-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-yellow-foreground: var(--brand-yellow-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -83,40 +98,41 @@
   border-color: var(--border);
 }
 
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  min-height: 100vh;
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Headings in Space Grotesk */
 h1, h2, h3, h4, h5, h6, .font-display {
   font-family: var(--font-space-grotesk), var(--font-geist-sans), system-ui, sans-serif;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
+/* Tabular figures for money, Z-readings, and numbers */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
 
-/* Subtle glow effects matching the box logo */
-.brand-glow {
-  box-shadow: 0 0 35px -8px rgba(56, 189, 248, 0.35);
+/* Navbar gradient from user's POS theme */
+.pos-navbar-gradient {
+  background: var(--pos-navbar-bg);
 }
 
-.brand-gradient {
-  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
-}
-
-.dark .brand-gradient-text {
-  background: linear-gradient(135deg, #e0f2fe 0%, #38bdf8 60%, #0284c7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.brand-gradient-text {
-  background: linear-gradient(135deg, #0369a1 0%, #0284c7 60%, #0284c7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Clean accessible focus ring */
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }

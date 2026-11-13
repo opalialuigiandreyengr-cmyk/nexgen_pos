@@ -2,483 +2,320 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  BadgeCheck,
   Building,
-  Check,
-  ChevronRight,
+  CheckCircle2,
   Clock,
   CloudCheck,
-  CloudUpload,
-  Coffee,
-  Cpu,
-  Database,
   FileCheck,
-  FileSpreadsheet,
-  FileText,
   HardDrive,
   HelpCircle,
   Laptop,
-  Layers,
-  Lock,
   Percent,
   Printer,
   Receipt,
-  RotateCcw,
   Scale,
-  ShieldAlert,
   ShieldCheck,
-  Sparkles,
   Store,
-  Tablet,
-  TrendingUp,
   UtensilsCrossed,
   WifiOff,
   Zap,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DemoForm } from "@/components/demo-form";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { SiteHeader } from "@/components/site-header";
 
-const NAV_ITEMS = [
-  { label: "Features", href: "#features" },
-  { label: "BIR & Malls", href: "#bir-compliance" },
-  { label: "Solutions", href: "#solutions" },
-  { label: "Hardware", href: "#hardware" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
-];
-
-const PHILIPPINE_ADVANTAGES = [
+const PILLARS = [
   {
     icon: WifiOff,
-    title: "100% Offline Counter Reliability",
-    tag: "SQLite WAL Engine",
-    desc: "Philippine internet drops shouldn't freeze your cashier during lunch rush. NexGen processes orders, bills, and kitchen tickets locally with zero latency, syncing to the cloud automatically once connection resumes.",
+    title: "100% Offline-First Speed",
+    badge: "SQLite WAL Engine",
+    color: "sky",
+    desc: "Philippine internet drops should never freeze your counter during lunch rush. NexGen processes orders, bills, and tickets locally in under 0.1 seconds, syncing to cloud storage automatically once connection returns.",
   },
   {
     icon: FileCheck,
-    title: "Automated BIR 2024 Tax Compliance",
-    tag: "Zero Manual Bookkeeping",
-    desc: "Built specifically around Philippine tax law. Automatically computes Senior Citizen & PWD 20% discounts with 12% VAT exemption, generates 7 mandatory sales books, and tracks non-resettable accumulated grand totals (NGRT).",
+    title: "Automated BIR 2024 Compliance",
+    badge: "Senior & PWD Formula",
+    color: "amber",
+    desc: "Built strictly for Philippine tax regulations. Automatically calculates 12% VAT exemption followed by 20% Senior/PWD discount, tracks Non-Resettable Grand Totals (NGRT), and outputs all 7 official BIR sales books.",
   },
   {
     icon: Building,
-    title: "Mall Tenant RLC File Generator",
-    tag: "SM · Ayala · Robinsons · Megaworld",
-    desc: "Operating in a mall? Generate daily end-of-day sales TXT files compliant with SM Tenant, Robinsons RLC, Ayala, and Megaworld leasing requirements in one click.",
+    title: "Mall Tenant RLC Generator",
+    badge: "SM · Ayala · Robinsons · Megaworld",
+    color: "sky",
+    desc: "Leasing inside a major Philippine shopping mall? Generate compliant daily end-of-day sales TXT files for SM Tenant, Robinsons RLC, Ayala, and Megaworld in one click with zero manual data entry.",
   },
   {
     icon: Printer,
-    title: "Multi-Printer USB & LAN Routing",
-    tag: "Kitchen · Bar · Cashier",
-    desc: "Route sizzling hot dishes to kitchen impact/dot-matrix printers (resistant to heat and steam), drink tickets to the bar, and official customer receipts to the counter thermal printer simultaneously.",
+    title: "Kitchen Impact & Thermal Routing",
+    badge: "Cashier · Bar · Hot Kitchen",
+    color: "amber",
+    desc: "Route kitchen tickets to heat-resistant dot-matrix impact printers (Epson TM-U220) so orders never fade under kitchen steam, while simultaneously issuing customer receipts at the front counter.",
   },
   {
     icon: Scale,
     title: "Raw Ingredient Food Costing",
-    tag: "Inventory & Recipe Engine",
-    desc: "Track raw food consumption to the gram. Every time a beef burger or milk tea is sold, buns, patties, pearls, and milk are automatically deducted from stock with low-stock warnings.",
+    badge: "Live Gram & Portion Tracking",
+    color: "sky",
+    desc: "Track exact ingredient consumption down to the gram. When a burger or milk tea is punched, buns, beef patties, pearls, and syrup are auto-deducted with low-stock alerts before you run out.",
   },
   {
     icon: CloudCheck,
-    title: "Remote Monitoring for Owners",
-    tag: "Supabase Cloud Fleet",
-    desc: "Monitor live gross/net sales, open tables, and Z-reading counters from your phone at home. Automated daily encrypted database snapshots (.db.gz) keep your data safe with 15-day rolling cloud retention.",
+    title: "Multi-Store Owner Cloud Portal",
+    badge: "Supabase Telemetry",
+    color: "amber",
+    desc: "Check live gross and net sales, active dine-in tables, and Z-reading counters from your smartphone anytime. Encrypted rolling cloud snapshots protect your business data against hardware loss.",
   },
 ];
 
-const BIR_SALES_BOOKS = [
+const COMPARISON = [
   {
-    name: "Senior Citizen Sales Book",
-    law: "R.A. 9994",
-    desc: "Formula: Deducts 12% VAT first, then applies 20% discount on qualified items. Captures OSCA ID & name.",
+    feature: "Zero Cashier Freeze During Internet Drops",
+    nexgen: "100% Offline Local Engine (0.1s latency)",
+    legacy: "Yes, but slow & no cloud sync",
+    cloudOnly: "Freezes or slows to a crawl",
   },
   {
-    name: "PWD Sales Book",
-    law: "R.A. 10754",
-    desc: "Automatic VAT exemption plus 20% discount. Records PWD ID number and full audit trail.",
+    feature: "BIR Senior / PWD 20% Discount + 12% VAT Exemption",
+    nexgen: "Fully Automated (R.A. 9994 & 10754)",
+    legacy: "Manual calculator required",
+    cloudOnly: "Generic US sales tax template",
   },
   {
-    name: "Solo Parent Sales Book",
-    law: "R.A. 11861",
-    desc: "Automatic 10% discount on basic necessities and formula items with Solo Parent ID recording.",
+    feature: "Mall Tenant Sales TXT (SM, Ayala, Robinsons RLC)",
+    nexgen: "Built-in 1-Click File Generator",
+    legacy: "Not supported",
+    cloudOnly: "Requires expensive custom plugin",
   },
   {
-    name: "Medal of Valor (MOV) Book",
-    law: "R.A. 9049",
-    desc: "Official 20% discount book for Medal of Valor awardees and qualified beneficiaries.",
+    feature: "Kitchen Impact (Dot-Matrix) Printer Routing",
+    nexgen: "Native USB & Network Protocol",
+    legacy: "Limited serial cable setup",
+    cloudOnly: "Thermal Bluetooth only (fades near heat)",
   },
   {
-    name: "National Athletes & Coaches",
-    law: "R.A. 10699",
-    desc: "Dedicated 20% discount tracking for certified athletes and coaches with PSC/ID documentation.",
+    feature: "Hardware Freedom & Flexibility",
+    nexgen: "Any Windows PC, Laptop, or Touch POS",
+    legacy: "Proprietary locked-down registers",
+    cloudOnly: "Locked to fragile iPads/Tablets",
   },
   {
-    name: "Regular & Other (OTH) Books",
-    law: "BIR Compliant",
-    desc: "Promotional, VIP, employee, and store-level discount tracking formatted for BIR audit inspections.",
-  },
-];
-
-const SOLUTIONS = [
-  {
-    icon: UtensilsCrossed,
-    title: "Casual Dining & Restobars",
-    desc: "Visual interactive floor plan, table transfers, split checks by item or seat, shift accountability, and bar/kitchen tickets.",
-    bullets: ["Visual table map & floor plan editor", "Split billing (by item or equal shares)", "Void & refund supervisor approval logs"],
-  },
-  {
-    icon: Coffee,
-    title: "Cafes & Milk Tea Shops",
-    desc: "High-speed ordering with drink modifiers, sugar levels, add-on sinkers, cup tags, and change fund drawer countdown.",
-    bullets: ["Drink modifier tags (Less Ice, 50% Sugar, Extra Shot)", "Fast counter order takers for high foot traffic", "End-of-shift change fund cash reconciliation"],
-  },
-  {
-    icon: Store,
-    title: "Bakeries, Cloud Kitchens & Kiosks",
-    desc: "Fast barcode scanning, delivery aggregator tracking (Grab/Foodpanda sales tags), and quick receipt printing.",
-    bullets: ["Delivery partner sales separation", "Barcode scanner & dual-screen support", "Small-footprint setup on compact touch PCs"],
-  },
-  {
-    icon: Building,
-    title: "Multi-Branch Restaurant Groups",
-    desc: "Manage multiple branches with isolated client IDs, centralized cloud telemetry, and offsite automated backups.",
-    bullets: ["Fleet sales overview on mobile/laptop", "Isolated client encryption keys", "Standardized recipe costing across branches"],
+    feature: "Multi-Store Owner Cloud Monitoring",
+    nexgen: "Centralized Supabase Web Portal",
+    legacy: "Must visit store in person",
+    cloudOnly: "Standard web dashboard",
   },
 ];
 
-const COMPARISON_ROWS = [
-  {
-    feature: "Offline counter reliability during ISP outages",
-    nexgen: "Yes — 100% local SQLite WAL with instant printing",
-    traditional: "Yes, but zero cloud sync or reports",
-    cloudOnly: "No — counter freezes or becomes read-only",
-  },
-  {
-    feature: "Automated Senior / PWD 20% + VAT Exemption formula",
-    nexgen: "Yes — fully automatic according to BIR guidelines",
-    traditional: "Manual calculator needed by cashier",
-    cloudOnly: "Varies — often requires manual VAT tweaks",
-  },
-  {
-    feature: "7 Mandatory BIR Official Sales Books",
-    nexgen: "Yes — instant 1-click Excel & screen export",
-    traditional: "Handwritten physical ledger book required",
-    cloudOnly: "Limited — usually requires expensive enterprise tier",
-  },
-  {
-    feature: "Mall Tenant Daily Sales File (SM, Ayala, Robinsons)",
-    nexgen: "Yes — built-in RLC / EOD TXT generator",
-    traditional: "Manual paper submission",
-    cloudOnly: "Costly add-on module ($50–$100/mo extra)",
-  },
-  {
-    feature: "Encrypted Cloud Backups with 15-day retention",
-    nexgen: "Included via Supabase Storage (.db.gz)",
-    traditional: "None — local SD card failure causes total loss",
-    cloudOnly: "Yes, but locked behind ongoing expensive subs",
-  },
-  {
-    feature: "Transaction fee or percentage cut on sales",
-    nexgen: "0% — Flat monthly fee only",
-    traditional: "0%, but expensive proprietary repairs",
-    cloudOnly: "Often 1% to 2.5% platform take-rate",
-  },
+const BIR_BOOKS = [
+  { name: "Senior Citizen Sales Book", law: "R.A. 9994", note: "Auto-exempts 12% VAT first, then applies 20% discount" },
+  { name: "Persons with Disability (PWD)", law: "R.A. 10754", note: "Applies 20% discount + VAT exemption with ID capture" },
+  { name: "National Athletes & Coaches", law: "R.A. 10699", note: "Automated discount computation and reporting" },
+  { name: "Solo Parents Sales Book", law: "R.A. 11861", note: "Compliant discount recording with child info" },
+  { name: "Medal of Valor Sales Book", law: "R.A. 9049", note: "Full statutory benefits with separate audit book" },
+  { name: "Cashier Accountability Report", law: "BIR POS Audit", note: "Shift-by-shift cash reconciliation & variance log" },
+  { name: "Consolidated Master Sales Book", law: "BIR RR 11-2004", note: "Daily Z-reading, VAT breakdown & NGRT tracking" },
 ];
 
 const HARDWARE_ITEMS = [
   {
-    title: "Thermal Receipt Printers",
-    types: "58mm & 80mm ESC/POS",
-    desc: "USB, Ethernet LAN, and virtual Windows queue printers. Instant customer receipts with graphic logo printing.",
+    title: "Touch POS Terminals & PCs",
+    desc: "Runs smoothly on all Windows 10/11 all-in-one touch terminals, counter laptops, and desktop computers.",
   },
   {
-    title: "Kitchen Impact Printers",
-    types: "Epson TM-U220 & Dot-Matrix",
-    desc: "Heavy-duty impact ribbons that withstand heat, humidity, and grease in busy restaurant hot lines.",
+    title: "Receipt Thermal Printers",
+    desc: "High-speed 80mm & 58mm thermal printers (Epson, Rongta, Xprinter) via USB, LAN, or Wi-Fi.",
   },
   {
-    title: "Cash Drawers & Triggers",
-    types: "Standard RJ11 (12V / 24V)",
-    desc: "Automatic electronic kick pulse triggered upon cash settlement, with manual key override support.",
+    title: "Kitchen Dot-Matrix Impact Printers",
+    desc: "Heat, grease, and moisture resistant impact printers (Epson TM-U220) for kitchen prep stations.",
   },
   {
-    title: "Barcodes & Dual Displays",
-    types: "1D/2D Scanners & Customer Screens",
-    desc: "Fast barcode product lookup for retail and dual-screen customer order verification displays.",
+    title: "Cash Drawers & Barcode Scanners",
+    desc: "Standard RJ11 auto-kick cash drawers and fast 1D/2D QR handheld or omnidirectional barcode scanners.",
   },
 ];
 
-const PRICING_TIERS = [
+const FAQS = [
   {
-    name: "Starter Counter",
-    tagline: "Best for Cafes, Kiosks & Quick Counter",
-    price: "₱1,499",
-    period: "/month per branch",
-    desc: "High-speed offline order taking with complete BIR compliance and cloud backups.",
-    popular: false,
-    features: [
-      "1 POS Counter Terminal",
-      "Offline-First SQLite WAL Speed",
-      "BIR Z-Reading & 7 Tax Sales Books",
-      "Senior Citizen & PWD Auto-Computation",
-      "Automated Supabase Cloud Backups",
-      "Thermal Receipt & Cash Drawer Trigger",
-      "Daily Cash & Change Fund Reconciliation",
-      "Remote Admin Sales Monitoring",
-    ],
+    q: "What happens if our branch loses internet or PLDT / Globe disconnects?",
+    a: "NexGen is built 100% offline-first. Your cashiers continue punching orders, sending kitchen tickets, and printing receipts without any disruption. As soon as internet connectivity returns, sales summaries and backups sync seamlessly to your cloud portal.",
   },
   {
-    name: "Pro Restaurant",
-    tagline: "Full-Service Dining, Bars & Kitchens",
-    price: "₱2,499",
-    period: "/month per branch",
-    desc: "For sit-down dining requiring floor plans, split checks, multi-printer routing, and raw food costing.",
-    popular: true,
-    features: [
-      "Everything in Starter Counter",
-      "Unlimited Crew & Cashier Terminals on LAN",
-      "Interactive Floor Plan & Table Management",
-      "Split Bill by Item, Seat, or Equal Shares",
-      "Multi-Printer Kitchen & Bar Routing",
-      "Recipe-Level Raw Ingredient Inventory",
-      "Mall Tenant Daily RLC Export (SM, Ayala, RLC)",
-      "Automated 15-Day Database Pruning",
-      "Dedicated Onboarding & Menu Setup",
-    ],
+    q: "How does NexGen handle Senior Citizen and PWD discounts under BIR rules?",
+    a: "NexGen calculates discounts using the official Philippine statutory formula: the item amount is first divided by 1.12 to strip the 12% VAT, and then a 20% discount is applied to the net amount. The customer name and ID number are logged automatically in the BIR Senior / PWD sales books.",
   },
   {
-    name: "Multi-Branch & Franchise",
-    tagline: "3+ Branches & Growing Food Chains",
-    price: "Custom",
-    period: "tailored pricing",
-    desc: "Centralized fleet oversight, custom accounting integrations, and priority SLA support.",
-    popular: false,
-    features: [
-      "Everything in Pro Restaurant",
-      "Centralized Multi-Store Mobile Dashboard",
-      "Isolated Branch Encryption Keys",
-      "Commissary & Inter-Branch Stock Transfers",
-      "Priority WhatsApp / Viber On-Call Support",
-      "Custom BIR & ERP Accounting Integrations",
-      "Hardware Package Financing Assistance",
-    ],
-  },
-];
-
-const FAQ_ITEMS = [
-  {
-    q: "What happens when our store internet connection drops?",
-    a: "NexGen POS was engineered specifically for Philippine internet conditions. It runs 100% locally on your store PC using a SQLite WAL database. You can take orders, settle bills, print receipts, and send kitchen tickets with zero lag while offline. Once your internet reconnects, the system automatically syncs sales summaries and backups to Supabase without any manual intervention.",
+    q: "Do I need to buy expensive proprietary hardware?",
+    a: "No. NexGen runs on standard Windows PCs, laptops, and touch screen POS terminals. You can reuse existing thermal receipt printers, cash drawers, and barcode scanners without buying locked hardware.",
   },
   {
-    q: "How does NexGen handle BIR Senior Citizen and PWD discounts?",
-    a: "In the Philippines, Republic Acts 9994 and 10754 mandate that a 12% VAT exemption must be removed first before applying the 20% discount on qualified items. NexGen calculates this automatically, recording the Senior/PWD ID, Name, Gross Sales, VAT-Exempt Sales, 12% VAT amount saved, and Net Sales directly into BIR-formatted Excel and screen reports.",
+    q: "Can NexGen generate daily sales files for shopping malls like SM or Robinsons?",
+    a: "Yes. NexGen includes a built-in Mall Tenant Sales Generator supporting SM Tenant TXT, Robinsons RLC format, Ayala Malls CIRS, and Megaworld end-of-day sales submission requirements.",
   },
   {
-    q: "Can we use our existing Windows PC and receipt printers?",
-    a: "Yes. NexGen POS runs on any standard Windows 10 or 11 touch terminal, desktop PC, or laptop. It supports standard thermal printers (Epson, Xprinter, Rongta, Sunmi) and dot-matrix impact kitchen printers (Epson TM-U220) via USB or Ethernet LAN.",
-  },
-  {
-    q: "How can the business owner monitor sales when away from the restaurant?",
-    a: "NexGen includes a built-in 'Admin (Remote)' role. Using our automated Supabase cloud telemetry or a secure direct connection (such as Tailscale), you can review live gross sales, open vs settled tables, today's top items, and Z-readings from your phone or laptop anywhere in the world—with live cashiering actions locked out so store operations aren't accidentally disturbed.",
-  },
-  {
-    q: "Can NexGen generate files for SM Supermalls, Ayala Malls, or Robinsons?",
-    a: "Yes! Major Philippine malls require tenants to submit daily automated sales TXT files (RLC / daily tenant sales data). NexGen includes a built-in mall export engine that formats your daily gross, net, VAT, and transaction counts exactly according to mall leasing guidelines.",
-  },
-  {
-    q: "Is there any setup fee or contract lock-in?",
-    a: "No long-term lock-in. Our software subscriptions are billed on a straightforward monthly basis in Philippine Pesos (PHP). We also offer free live walkthroughs and sample menu onboarding so you can test the system with your actual food items before going live.",
+    q: "How can business owners monitor multiple store locations?",
+    a: "Owners receive access to the cloud fleet portal. From any phone, tablet, or browser, you can inspect live net sales, open table orders, and Z-reading counts across all your branches.",
   },
 ];
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-200">
-      {/* Top Notification / Trust Bar */}
-      <div className="border-b border-border/80 bg-primary/10 text-primary px-4 py-1.5 text-xs font-medium text-center flex items-center justify-center gap-2">
-        <Sparkles className="h-3.5 w-3.5 shrink-0" />
-        <span>Philippine BIR 2024 &amp; Mall Tenant RLC Compliant · 100% Offline-First Speed</span>
-      </div>
-
-      {/* Main Navigation Bar */}
-      <header className="sticky top-0 z-50 border-b border-border/80 bg-background/85 backdrop-blur-md">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-          {/* Brand Logo & Title */}
-          <Link href="/" className="flex items-center gap-2.5 font-display font-bold text-lg tracking-tight group">
-            <div className="relative h-9 w-9 rounded-lg overflow-hidden border border-primary/40 bg-card shadow-xs group-hover:border-primary transition-colors">
-              <Image
-                src="/box_logo.png"
-                alt="NexGen POS Logo"
-                fill
-                sizes="36px"
-                className="object-contain p-0.5"
-                priority
-              />
-            </div>
-            <div className="flex flex-col leading-tight">
-              <span className="font-display font-bold tracking-tight text-foreground">NexGen POS</span>
-              <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
-                Philippines
-              </span>
-            </div>
-          </Link>
-
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 text-xs uppercase font-medium tracking-wider text-muted-foreground">
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="hover:text-primary transition-colors"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Controls & CTAs */}
-          <div className="flex items-center gap-2.5">
-            <ThemeToggle />
-            <Link
-              href="/portal-login"
-              className="hidden sm:inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground px-2.5 py-1.5 rounded-md hover:bg-secondary transition-colors"
-            >
-              <Lock className="h-3.5 w-3.5" />
-              <span>Operator Portal</span>
-            </Link>
-            <a href="#demo">
-              <Button size="sm" className="font-display font-semibold brand-gradient text-white shadow-xs">
-                Book Free Demo <ArrowRight className="h-3.5 w-3.5" />
-              </Button>
-            </a>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans selection:bg-sky-500 selection:text-white">
+      {/* Sticky POS-Branded Header */}
+      <SiteHeader />
 
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative overflow-hidden border-b border-border/80 pt-16 pb-20 lg:pt-24 lg:pb-28">
-          {/* Subtle Ambient Glow */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-primary/10 rounded-full blur-3xl pointer-events-none -z-10" />
+        {/* ==============================================================
+            HERO SECTION
+            ============================================================== */}
+        <section className="relative overflow-hidden pt-16 pb-24 sm:pt-24 sm:pb-32 border-b border-border">
+          {/* Subtle background glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-sky-500/10 via-amber-500/5 to-transparent blur-3xl pointer-events-none" />
 
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Hero Pitch */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-mono text-primary">
-                <BadgeCheck className="h-3.5 w-3.5" />
-                <span>The Heavy-Duty Restaurant &amp; Retail POS for PH</span>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+              {/* Hero Left: Value Proposition */}
+              <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+                {/* Official Compliance Badge */}
+                <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-600 dark:text-sky-400 text-sm font-semibold shadow-xs">
+                  <ShieldCheck className="h-4 w-4" />
+                  <span>Philippine Offline-First Engine · BIR 2024 Ready</span>
+                </div>
+
+                {/* Main Heading */}
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold font-display tracking-tight text-foreground leading-[1.15]">
+                  The Ultra-Reliable POS for <span className="text-sky-600 dark:text-sky-400">Philippine Food</span> &amp;{" "}
+                  <span className="text-amber-600 dark:text-amber-400">Retail</span>.
+                </h1>
+
+                {/* Clear, Non-wordy Subtitle */}
+                <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                  Zero cashier downtime during internet drops. Automated BIR Senior &amp; PWD discounts, 1-click Mall Tenant RLC reports, and heat-proof kitchen impact printing.
+                </p>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                  <a href="#demo" className="w-full sm:w-auto">
+                    <Button
+                      size="lg"
+                      className="w-full sm:w-auto h-13 px-8 text-base font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-xl shadow-md transition-all hover:scale-[1.02] active:scale-[0.98]"
+                    >
+                      Book Free Live Demo
+                      <ArrowRight className="h-5 w-5 ml-2" />
+                    </Button>
+                  </a>
+                  <a href="#features" className="w-full sm:w-auto">
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="w-full sm:w-auto h-13 px-7 text-base font-semibold rounded-xl border-border bg-card hover:bg-accent text-foreground"
+                    >
+                      Explore Capabilities
+                    </Button>
+                  </a>
+                </div>
+
+                {/* Key Bullet Highlights */}
+                <div className="pt-4 grid grid-cols-2 sm:grid-cols-3 gap-4 text-left border-t border-border/80">
+                  <div>
+                    <div className="text-lg font-bold text-foreground font-display">100% Offline</div>
+                    <div className="text-sm text-muted-foreground">Runs during PLDT/Globe drops</div>
+                  </div>
+                  <div>
+                    <div className="text-lg font-bold text-foreground font-display">BIR Formula</div>
+                    <div className="text-sm text-muted-foreground">RA 9994 / RA 10754 compliant</div>
+                  </div>
+                  <div className="col-span-2 sm:col-span-1">
+                    <div className="text-lg font-bold text-foreground font-display">Mall Tenant RLC</div>
+                    <div className="text-sm text-muted-foreground">SM, Ayala, Robinsons TXT</div>
+                  </div>
+                </div>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-[1.08] text-foreground">
-                Run your store <span className="brand-gradient-text">offline.</span>
-                <br />
-                Monitor every branch <span className="brand-gradient-text">in the cloud.</span>
-              </h1>
-
-              <p className="text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed">
-                Never let PLDT, Globe, or power hiccups freeze your counter. NexGen POS delivers
-                sub-second local counter speed, automated BIR 2024 tax books, kitchen impact printer
-                routing, and multi-branch cloud telemetry powered by Supabase.
-              </p>
-
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <a href="#demo">
-                  <Button size="lg" className="brand-gradient text-white font-display font-bold shadow-md">
-                    Book 15-Minute Live Demo <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </a>
-                <a href="#pricing">
-                  <Button size="lg" variant="outline" className="font-display font-semibold">
-                    Explore Plans (PHP)
-                  </Button>
-                </a>
-              </div>
-
-              {/* Trust Indicators */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-border/70 text-xs">
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <WifiOff className="h-4 w-4 text-primary shrink-0" />
-                  <span>100% Offline Ready</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <FileText className="h-4 w-4 text-emerald-500 shrink-0" />
-                  <span>7 BIR Sales Books</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <Building className="h-4 w-4 text-sky-500 shrink-0" />
-                  <span>Mall RLC Export</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <CloudUpload className="h-4 w-4 text-indigo-500 shrink-0" />
-                  <span>Daily Cloud Backup</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Hero Interactive POS Telemetry Mockup */}
-            <div className="lg:col-span-5">
-              <div className="relative rounded-2xl border border-primary/30 bg-card p-2 shadow-2xl brand-glow">
-                {/* Header of Simulated POS Window */}
-                <div className="rounded-xl border border-border bg-card p-4 space-y-4 font-mono text-xs">
-                  <div className="flex items-center justify-between border-b border-border pb-3">
-                    <div className="flex items-center gap-2">
-                      <div className="relative h-6 w-6 rounded-md overflow-hidden border border-primary/40 bg-secondary">
-                        <Image src="/box_logo.png" alt="NexGen" fill sizes="24px" className="object-contain p-0.5" />
-                      </div>
-                      <span className="font-display font-bold text-sm text-foreground">NexGen POS Live Telemetry</span>
+              {/* Hero Right: Live Interactive Terminal Card */}
+              <div className="lg:col-span-5">
+                <div className="rounded-2xl border border-border bg-card p-6 sm:p-7 shadow-xl space-y-5 relative overflow-hidden">
+                  {/* Decorative Header Bar */}
+                  <div className="flex items-center justify-between pb-4 border-b border-border">
+                    <div className="flex items-center gap-3">
+                      <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                      <div className="w-3 h-3 rounded-full bg-amber-500/80" />
+                      <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                      <span className="text-xs font-mono font-medium text-muted-foreground ml-2">
+                        terminal-01.savore.local
+                      </span>
                     </div>
-                    <Badge variant="default" className="text-[11px] font-mono">
-                      ● ONLINE · SYNCED
-                    </Badge>
-                  </div>
-
-                  {/* Real Philippine Sales Numbers */}
-                  <div className="grid grid-cols-2 gap-2.5">
-                    <div className="rounded-lg border border-border bg-background p-3">
-                      <div className="text-[10px] text-muted-foreground uppercase font-sans">Today Net Sales</div>
-                      <div className="text-xl font-bold text-foreground tabular-nums mt-1 font-display">
-                        ₱68,450.25
-                      </div>
-                      <div className="text-[10px] text-emerald-500 mt-0.5">+18% vs last week</div>
-                    </div>
-                    <div className="rounded-lg border border-border bg-background p-3">
-                      <div className="text-[10px] text-muted-foreground uppercase font-sans">Active Dine-In</div>
-                      <div className="text-xl font-bold text-foreground tabular-nums mt-1 font-display">
-                        14 Tables
-                      </div>
-                      <div className="text-[10px] text-sky-500 mt-0.5">8 Pending Kitchen Tickets</div>
-                    </div>
-                  </div>
-
-                  {/* BIR Snapshot Breakdown */}
-                  <div className="rounded-lg border border-border bg-background divide-y divide-border text-[11px]">
-                    <div className="p-2.5 flex items-center justify-between">
-                      <span className="text-muted-foreground">VAT-Exempt Sales (Senior/PWD)</span>
-                      <span className="font-semibold tabular-nums">₱12,840.00</span>
-                    </div>
-                    <div className="p-2.5 flex items-center justify-between">
-                      <span className="text-muted-foreground">12% VAT Collected</span>
-                      <span className="font-semibold tabular-nums">₱5,958.24</span>
-                    </div>
-                    <div className="p-2.5 flex items-center justify-between">
-                      <span className="text-muted-foreground">Cumulative BIR NGRT (Reset: 0)</span>
-                      <span className="font-semibold tabular-nums text-foreground">₱17,481,728.75</span>
-                    </div>
-                    <div className="p-2.5 flex items-center justify-between">
-                      <span className="text-muted-foreground">Last Supabase Snapshot</span>
-                      <span className="text-emerald-500 font-semibold">Savore_pos_latest.db.gz</span>
-                    </div>
-                  </div>
-
-                  <div className="rounded-md border border-primary/20 bg-primary/5 p-2.5 flex items-center justify-between text-[11px]">
-                    <span className="text-primary font-medium flex items-center gap-1.5 font-sans">
-                      <ShieldCheck className="h-4 w-4" /> 15-Day Rolling Cloud Retention
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400">
+                      ● SQLite WAL Active
                     </span>
-                    <span className="text-muted-foreground">Auto-prune ON</span>
+                  </div>
+
+                  {/* Terminal Stats Box */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="rounded-xl border border-border/70 bg-secondary/50 p-4">
+                      <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1">
+                        Today&apos;s Net Sales
+                      </span>
+                      <span className="text-2xl sm:text-3xl font-extrabold font-display text-sky-600 dark:text-sky-400 tabular-nums">
+                        ₱48,920.00
+                      </span>
+                      <span className="text-xs text-muted-foreground block mt-1">
+                        142 Settled Orders
+                      </span>
+                    </div>
+
+                    <div className="rounded-xl border border-border/70 bg-secondary/50 p-4">
+                      <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-1">
+                        Non-Resettable (NGRT)
+                      </span>
+                      <span className="text-xl sm:text-2xl font-bold font-display text-amber-600 dark:text-amber-400 tabular-nums">
+                        ₱17,413,278
+                      </span>
+                      <span className="text-xs text-muted-foreground block mt-1">
+                        Z-Reading #179
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Operational Status Preview */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between text-sm p-3 rounded-lg border border-border bg-background">
+                      <span className="font-medium text-foreground flex items-center gap-2">
+                        <Printer className="h-4 w-4 text-sky-500" />
+                        Kitchen Impact Printer (LAN)
+                      </span>
+                      <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                        ONLINE · 0.08s
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between text-sm p-3 rounded-lg border border-border bg-background">
+                      <span className="font-medium text-foreground flex items-center gap-2">
+                        <Receipt className="h-4 w-4 text-amber-500" />
+                        Cashier Thermal 80mm (USB)
+                      </span>
+                      <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                        ONLINE · READY
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between text-sm p-3 rounded-lg border border-border bg-background">
+                      <span className="font-medium text-foreground flex items-center gap-2">
+                        <Building className="h-4 w-4 text-slate-400" />
+                        Robinsons Mall RLC Export
+                      </span>
+                      <span className="text-xs font-bold text-sky-600 dark:text-sky-400">
+                        AUTO-GENERATED
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Footnote */}
+                  <div className="pt-2 text-center text-xs text-muted-foreground">
+                    100% resilient during brownouts &amp; broadband drops.
                   </div>
                 </div>
               </div>
@@ -486,42 +323,57 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Section 2: Core Philippine Advantages */}
-        <section id="features" className="border-b border-border/80 py-20 bg-card/40">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12">
-            <div className="max-w-2xl space-y-3">
-              <Badge variant="default" className="font-mono text-xs">
-                Operational Excellence
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight">
-                Built specifically for real Philippine restaurant challenges
+        {/* ==============================================================
+            SECTION 1: CORE PH PILLARS
+            ============================================================== */}
+        <section id="features" className="py-24 sm:py-32 border-b border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+            {/* Section Header */}
+            <div className="text-center max-w-3xl mx-auto space-y-4">
+              <span className="text-sm font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+                Engineered for Philippine Operations
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display tracking-tight text-foreground">
+                Everything You Need to Run Seamlessly.
               </h2>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Most cloud POS systems are engineered in Silicon Valley or Singapore, assuming
-                uninterruptible gigabit fiber. NexGen was engineered from day one for Philippine
-                local realities.
+              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+                Built from real kitchen rushes, Philippine mall requirements, and BIR audit standards.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {PHILIPPINE_ADVANTAGES.map((item) => {
-                const Icon = item.icon;
+            {/* Grid of 6 Pillars */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {PILLARS.map((p, idx) => {
+                const Icon = p.icon;
                 return (
-                  <Card key={item.title} className="bg-card hover:border-primary/50 transition-colors shadow-xs">
-                    <CardHeader className="space-y-2.5">
+                  <Card
+                    key={idx}
+                    className="p-8 sm:p-9 rounded-2xl border border-border bg-card hover:border-sky-500/40 transition-all shadow-sm hover:shadow-md flex flex-col justify-between"
+                  >
+                    <div className="space-y-5">
                       <div className="flex items-center justify-between">
-                        <div className="h-10 w-10 rounded-lg border border-primary/30 bg-primary/10 flex items-center justify-center text-primary">
-                          <Icon className="h-5 w-5" />
+                        <div
+                          className={`w-14 h-14 rounded-xl flex items-center justify-center ${
+                            p.color === "sky"
+                              ? "bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20"
+                              : "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
+                          }`}
+                        >
+                          <Icon className="h-7 w-7" />
                         </div>
-                        <Badge variant="secondary" className="font-mono text-[10px]">
-                          {item.tag}
-                        </Badge>
+                        <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-secondary text-muted-foreground border border-border">
+                          {p.badge}
+                        </span>
                       </div>
-                      <CardTitle className="text-base font-display font-bold pt-1">{item.title}</CardTitle>
-                      <CardDescription className="text-xs leading-relaxed text-muted-foreground">
-                        {item.desc}
-                      </CardDescription>
-                    </CardHeader>
+
+                      <h3 className="text-xl sm:text-2xl font-bold font-display text-foreground leading-snug">
+                        {p.title}
+                      </h3>
+
+                      <p className="text-base text-muted-foreground leading-relaxed">
+                        {p.desc}
+                      </p>
+                    </div>
                   </Card>
                 );
               })}
@@ -529,411 +381,427 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Section 3: Deep-Dive BIR & Tax Compliance Center */}
-        <section id="bir-compliance" className="border-b border-border/80 py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              <div className="lg:col-span-6 space-y-4">
-                <Badge variant="default" className="font-mono text-xs">
-                  BIR RR 16-2018 &amp; R.A. Compliance
-                </Badge>
-                <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight">
-                  Protect your restaurant from BIR audit penalties
+        {/* ==============================================================
+            SECTION 2: BENCHMARK COMPARISON MATRIX
+            ============================================================== */}
+        <section className="py-24 sm:py-32 bg-secondary/30 border-b border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+            <div className="text-center max-w-3xl mx-auto space-y-4">
+              <span className="text-sm font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+                Philippine POS Benchmark
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display tracking-tight text-foreground">
+                How NexGen Compares Against Alternatives.
+              </h2>
+              <p className="text-lg sm:text-xl text-muted-foreground">
+                See why Philippine merchants choose NexGen over legacy cash registers and cloud-only tablet systems.
+              </p>
+            </div>
+
+            {/* Accessible Responsive Table Container */}
+            <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-sm">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse min-w-[700px]">
+                  <thead>
+                    <tr className="border-b border-border bg-muted/60">
+                      <th className="py-5 px-6 text-base font-bold text-foreground font-display w-2/5">
+                        Operational Capability
+                      </th>
+                      <th className="py-5 px-6 text-base font-bold text-sky-600 dark:text-sky-400 font-display w-1/4 bg-sky-500/5 border-x border-border">
+                        NexGen POS
+                      </th>
+                      <th className="py-5 px-6 text-base font-semibold text-muted-foreground font-display w-1/6">
+                        Legacy Cash Registers
+                      </th>
+                      <th className="py-5 px-6 text-base font-semibold text-muted-foreground font-display w-1/6">
+                        Cloud-Only Tablet POS
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border">
+                    {COMPARISON.map((row, i) => (
+                      <tr key={i} className="hover:bg-muted/30 transition-colors">
+                        <td className="py-5 px-6 font-semibold text-base text-foreground">
+                          {row.feature}
+                        </td>
+                        <td className="py-5 px-6 text-base font-bold text-sky-600 dark:text-sky-400 bg-sky-500/5 border-x border-border">
+                          <div className="flex items-center gap-2">
+                            <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
+                            <span>{row.nexgen}</span>
+                          </div>
+                        </td>
+                        <td className="py-5 px-6 text-base text-muted-foreground">
+                          {row.legacy}
+                        </td>
+                        <td className="py-5 px-6 text-base text-muted-foreground">
+                          {row.cloudOnly}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ==============================================================
+            SECTION 3: BIR COMPLIANCE & MALL TENANT MODULE
+            ============================================================== */}
+        <section id="bir-malls" className="py-24 sm:py-32 border-b border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              {/* Left Column: Statutory Formula Explanation */}
+              <div className="lg:col-span-6 space-y-6">
+                <span className="text-sm font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+                  Zero BIR Audit Headaches
+                </span>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display tracking-tight text-foreground">
+                  The Exact BIR 2024 Discount Formula, Automated.
                 </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Philippine store owners face heavy fines for manual calculation errors on Senior
-                  Citizen discounts or incomplete sales book ledgers. NexGen POS automates the exact
-                  BIR legal formulas so your cashiers never make a math mistake.
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Avoid heavy BIR non-compliance penalties. NexGen enforces the exact statutory calculation mandated by the Bureau of Internal Revenue:
                 </p>
+
+                {/* Mathematical Formula Card */}
+                <div className="rounded-xl border border-border bg-secondary/50 p-6 space-y-3 font-mono">
+                  <div className="text-xs uppercase text-muted-foreground font-semibold">
+                    BIR Official Senior &amp; PWD Calculation
+                  </div>
+                  <div className="text-base sm:text-lg text-foreground font-bold">
+                    Net Price = (Gross Item Price ÷ 1.12) × 0.80
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    12% VAT is automatically removed before applying the 20% discount. No manual math by cashiers.
+                  </div>
+                </div>
+
                 <div className="space-y-3 pt-2">
-                  <div className="rounded-lg border border-border bg-card p-3.5 space-y-1 text-xs">
-                    <div className="font-display font-bold text-foreground">
-                      The Exact Senior/PWD Formula (RA 9994 &amp; RA 10754):
-                    </div>
-                    <code className="block rounded bg-secondary p-2 text-primary font-mono text-[11px]">
-                      Net of VAT = Gross Amount ÷ 1.12<br />
-                      Discounted Price = Net of VAT × 0.80 (20% off)<br />
-                      VAT Payable = ₱0.00 (100% VAT Exempt)
-                    </code>
-                    <p className="text-[11px] text-muted-foreground pt-1">
-                      Computed automatically per eligible item with full ID validation audit logging.
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-emerald-500 mt-1 shrink-0" />
+                    <p className="text-base text-foreground font-medium">
+                      Logs OSCA / PWD ID numbers directly onto receipts and audit books.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-emerald-500 mt-1 shrink-0" />
+                    <p className="text-base text-foreground font-medium">
+                      Maintains non-resettable accumulated grand totals (NGRT) across all Z-readings.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* BIR Sales Book Matrix */}
-              <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {BIR_SALES_BOOKS.map((b) => (
-                  <div
-                    key={b.name}
-                    className="rounded-xl border border-border bg-card p-4 space-y-1.5 hover:border-primary/50 transition-colors"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="font-display font-bold text-xs text-foreground">{b.name}</span>
-                      <span className="text-[10px] font-mono text-primary font-semibold">{b.law}</span>
-                    </div>
-                    <p className="text-[11px] text-muted-foreground leading-relaxed">{b.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 4: Industry Solutions */}
-        <section id="solutions" className="border-b border-border/80 py-20 bg-card/30">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12">
-            <div className="text-center max-w-2xl mx-auto space-y-3">
-              <Badge variant="default" className="font-mono text-xs">
-                Tailored Solutions
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight">
-                Designed for every food &amp; retail format
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                Whether you run an upscale restobar in BGC, a busy milk tea kiosk in Cebu, or a
-                chain of bakeries, NexGen adapts to your specific floor and counter workflow.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-              {SOLUTIONS.map((s) => {
-                const Icon = s.icon;
-                return (
-                  <Card key={s.title} className="bg-card flex flex-col justify-between">
-                    <CardHeader className="space-y-3">
-                      <div className="h-10 w-10 rounded-lg border border-primary/30 bg-primary/10 flex items-center justify-center text-primary">
-                        <Icon className="h-5 w-5" />
+              {/* Right Column: 7 Official Sales Books */}
+              <div className="lg:col-span-6 space-y-4">
+                <h3 className="text-xl font-bold font-display text-foreground mb-4">
+                  7 BIR-Mandated Sales Books Included:
+                </h3>
+                <div className="space-y-3">
+                  {BIR_BOOKS.map((b, idx) => (
+                    <div
+                      key={idx}
+                      className="p-4 rounded-xl border border-border bg-card flex items-center justify-between gap-4 shadow-xs"
+                    >
+                      <div>
+                        <div className="font-bold text-base text-foreground">{b.name}</div>
+                        <div className="text-sm text-muted-foreground">{b.note}</div>
                       </div>
-                      <CardTitle className="text-base font-display font-bold">{s.title}</CardTitle>
-                      <CardDescription className="text-xs text-muted-foreground leading-relaxed">
-                        {s.desc}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <ul className="space-y-2 border-t border-border/80 pt-3 text-xs text-muted-foreground">
-                        {s.bullets.map((b) => (
-                          <li key={b} className="flex items-start gap-1.5">
-                            <Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Section 5: Hardware & Supported Peripherals */}
-        <section id="hardware" className="border-b border-border/80 py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              <div className="lg:col-span-5 space-y-4">
-                <Badge variant="default" className="font-mono text-xs">
-                  Hardware Flexibility
-                </Badge>
-                <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight">
-                  Bring your own hardware. No proprietary lock-in.
-                </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Avoid paying ₱80,000+ for proprietary locked POS machines. NexGen runs smoothly on
-                  any Windows 10/11 touch terminal, desktop, or laptop, seamlessly connecting to
-                  industry-standard printers, cash drawers, and barcode readers.
-                </p>
-                <div className="flex flex-wrap gap-2 pt-2">
-                  <Badge variant="secondary">Windows 10 / 11</Badge>
-                  <Badge variant="secondary">USB &amp; Ethernet LAN</Badge>
-                  <Badge variant="secondary">RJ11 12V/24V</Badge>
-                  <Badge variant="secondary">Epson ESC/POS</Badge>
+                      <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-secondary text-foreground shrink-0 border border-border">
+                        {b.law}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
-
-              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {HARDWARE_ITEMS.map((h) => (
-                  <Card key={h.title} className="bg-card">
-                    <CardHeader className="space-y-1.5 p-5">
-                      <div className="text-xs font-mono text-primary font-semibold">{h.types}</div>
-                      <CardTitle className="text-sm font-display font-bold">{h.title}</CardTitle>
-                      <CardDescription className="text-xs text-muted-foreground leading-relaxed">
-                        {h.desc}
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
-                ))}
-              </div>
             </div>
           </div>
         </section>
 
-        {/* Section 6: Benchmarking Comparison Table */}
-        <section className="border-b border-border/80 py-20 bg-card/40">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-10">
-            <div className="max-w-2xl space-y-3">
-              <Badge variant="default" className="font-mono text-xs">
-                How We Compare
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight">
-                NexGen POS vs Legacy Registers vs Cloud-Only Tablets
+        {/* ==============================================================
+            SECTION 4: HARDWARE COMPATIBILITY
+            ============================================================== */}
+        <section id="hardware" className="py-24 sm:py-32 bg-secondary/30 border-b border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+            <div className="text-center max-w-3xl mx-auto space-y-4">
+              <span className="text-sm font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+                Hardware Agnostic &amp; Flexible
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display tracking-tight text-foreground">
+                Plug &amp; Play With Your Existing Equipment.
               </h2>
-              <p className="text-sm text-muted-foreground">
-                See why Philippine restaurateurs choose an offline-first architecture with cloud
-                telemetry.
+              <p className="text-lg sm:text-xl text-muted-foreground">
+                No expensive proprietary lock-in. Use standard Windows hardware and standard industry peripherals.
               </p>
             </div>
 
-            <div className="overflow-x-auto rounded-xl border border-border bg-card shadow-xs">
-              <table className="w-full text-xs text-left">
-                <thead>
-                  <tr className="border-b border-border bg-secondary/50 font-display text-muted-foreground uppercase text-[11px] tracking-wider">
-                    <th className="py-3 px-4 font-semibold">Capability</th>
-                    <th className="py-3 px-4 font-bold text-primary">NexGen POS</th>
-                    <th className="py-3 px-4 font-medium">Legacy Cash Register</th>
-                    <th className="py-3 px-4 font-medium">Pure Cloud Tablet POS</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  {COMPARISON_ROWS.map((row) => (
-                    <tr key={row.feature} className="hover:bg-accent/30 transition-colors">
-                      <td className="py-3 px-4 font-medium text-foreground">{row.feature}</td>
-                      <td className="py-3 px-4 font-semibold text-primary">{row.nexgen}</td>
-                      <td className="py-3 px-4 text-muted-foreground">{row.traditional}</td>
-                      <td className="py-3 px-4 text-muted-foreground">{row.cloudOnly}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 7: Pricing Section in PHP */}
-        <section id="pricing" className="border-b border-border/80 py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12">
-            <div className="text-center max-w-2xl mx-auto space-y-3">
-              <Badge variant="default" className="font-mono text-xs">
-                Transparent Philippine Pricing
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight">
-                Simple monthly plans. Zero transaction take-rate.
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                We believe your revenue is yours. We never take 1% or 2% cuts of your hard-earned
-                daily sales.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-              {PRICING_TIERS.map((tier) => (
-                <Card
-                  key={tier.name}
-                  className={`flex flex-col justify-between ${
-                    tier.popular
-                      ? "border-primary shadow-xl brand-glow relative bg-card"
-                      : "bg-card border-border"
-                  }`}
-                >
-                  {tier.popular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-0.5 text-[11px] font-display font-bold text-primary-foreground uppercase tracking-wider">
-                      Most Popular for Restaurants
-                    </div>
-                  )}
-
-                  <CardHeader className="space-y-3 pt-6">
-                    <div>
-                      <CardTitle className="text-lg font-display font-bold">{tier.name}</CardTitle>
-                      <CardDescription className="text-xs text-muted-foreground mt-1">
-                        {tier.tagline}
-                      </CardDescription>
-                    </div>
-
-                    <div className="pt-2">
-                      <span className="text-4xl font-display font-bold text-foreground tabular-nums">
-                        {tier.price}
-                      </span>
-                      <span className="text-xs text-muted-foreground ml-1.5">{tier.period}</span>
-                    </div>
-
-                    <p className="text-xs text-muted-foreground leading-relaxed pt-1">{tier.desc}</p>
-                  </CardHeader>
-
-                  <CardContent className="space-y-5 pt-0">
-                    <ul className="space-y-2.5 border-t border-border pt-4 text-xs text-muted-foreground">
-                      {tier.features.map((f) => (
-                        <li key={f} className="flex items-start gap-2">
-                          <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                          <span className="text-foreground">{f}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <a href="#demo" className="block pt-2">
-                      <Button
-                        size="sm"
-                        variant={tier.popular ? "default" : "outline"}
-                        className={`w-full font-display font-bold ${
-                          tier.popular ? "brand-gradient text-white" : ""
-                        }`}
-                      >
-                        Request Demo for {tier.name}
-                      </Button>
-                    </a>
-                  </CardContent>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {HARDWARE_ITEMS.map((item, i) => (
+                <Card key={i} className="p-7 rounded-2xl border border-border bg-card shadow-sm space-y-4">
+                  <div className="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20 flex items-center justify-center">
+                    <Laptop className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-xl font-bold font-display text-foreground">
+                    {item.title}
+                  </h3>
+                  <p className="text-base text-muted-foreground leading-relaxed">
+                    {item.desc}
+                  </p>
                 </Card>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Section 8: Frequently Asked Questions */}
-        <section id="faq" className="border-b border-border/80 py-20 bg-card/30">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-10">
-            <div className="text-center space-y-3">
-              <Badge variant="default" className="font-mono text-xs">
-                Common Inquiries
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight">
-                Frequently Asked Questions
+        {/* ==============================================================
+            SECTION 5: PHILIPPINE PESO PRICING
+            ============================================================== */}
+        <section id="pricing" className="py-24 sm:py-32 border-b border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+            <div className="text-center max-w-3xl mx-auto space-y-4">
+              <span className="text-sm font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+                Transparent Philippine Pricing
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display tracking-tight text-foreground">
+                Affordable Plans With No Hidden Fees.
               </h2>
-              <p className="text-sm text-muted-foreground">
-                Everything you need to know about setting up NexGen POS in the Philippines.
+              <p className="text-lg sm:text-xl text-muted-foreground">
+                Transparent subscriptions in Philippine Pesos (PHP). All plans include our 100% offline engine.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {FAQ_ITEMS.map((item) => (
-                <div key={item.q} className="rounded-xl border border-border bg-card p-5 space-y-2">
-                  <h3 className="font-display font-bold text-sm text-foreground flex items-start gap-2">
-                    <HelpCircle className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                    <span>{item.q}</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+              {/* Plan 1: Retail / Starter */}
+              <div className="rounded-2xl border border-border bg-card p-8 sm:p-10 flex flex-col justify-between shadow-sm space-y-8">
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-2xl font-bold font-display text-foreground">Starter Counter</h3>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      For retail kiosks, boutiques, bakeries, and quick counters.
+                    </p>
+                  </div>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-4xl sm:text-5xl font-extrabold font-display text-foreground">₱1,499</span>
+                    <span className="text-muted-foreground text-sm font-medium">/ month</span>
+                  </div>
+                  <ul className="space-y-3.5 text-base text-foreground">
+                    <li className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
+                      <span>100% Offline SQLite engine</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
+                      <span>7 BIR-compliant sales books</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
+                      <span>Thermal receipt printing (USB)</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
+                      <span>Daily cloud database backup</span>
+                    </li>
+                  </ul>
+                </div>
+                <a href="#demo">
+                  <Button variant="outline" className="w-full h-12 text-base font-semibold rounded-xl">
+                    Get Started
+                  </Button>
+                </a>
+              </div>
+
+              {/* Plan 2: Pro Restaurant (Featured) */}
+              <div className="rounded-2xl border-2 border-sky-500 bg-card p-8 sm:p-10 flex flex-col justify-between shadow-xl space-y-8 relative">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-sky-600 text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full shadow-sm">
+                  Most Popular For Dining
+                </div>
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-2xl font-bold font-display text-foreground">Pro Restaurant</h3>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      For cafes, dine-in restaurants, bars, and food park tenants.
+                    </p>
+                  </div>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-4xl sm:text-5xl font-extrabold font-display text-sky-600 dark:text-sky-400">₱2,499</span>
+                    <span className="text-muted-foreground text-sm font-medium">/ month</span>
+                  </div>
+                  <ul className="space-y-3.5 text-base text-foreground">
+                    <li className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
+                      <span>Everything in Starter plan</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
+                      <span>Table layout &amp; bill split management</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
+                      <span>Kitchen dot-matrix impact routing</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
+                      <span>Mall Tenant RLC (SM, Robinsons, Ayala)</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
+                      <span>Raw ingredient recipe inventory</span>
+                    </li>
+                  </ul>
+                </div>
+                <a href="#demo">
+                  <Button className="w-full h-12 text-base font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-xl shadow-md">
+                    Book Free Demo
+                  </Button>
+                </a>
+              </div>
+
+              {/* Plan 3: Multi-Branch Fleet */}
+              <div className="rounded-2xl border border-border bg-card p-8 sm:p-10 flex flex-col justify-between shadow-sm space-y-8">
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-2xl font-bold font-display text-foreground">Multi-Branch Fleet</h3>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      For restaurant chains, franchise operators, and mall retail fleets.
+                    </p>
+                  </div>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-4xl sm:text-5xl font-extrabold font-display text-foreground">Custom</span>
+                    <span className="text-muted-foreground text-sm font-medium">volume pricing</span>
+                  </div>
+                  <ul className="space-y-3.5 text-base text-foreground">
+                    <li className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
+                      <span>Multi-store Owner Cloud Portal</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
+                      <span>Centralized menu &amp; price sync</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
+                      <span>Consolidated executive reporting</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
+                      <span>Dedicated technical onboarding</span>
+                    </li>
+                  </ul>
+                </div>
+                <a href="#demo">
+                  <Button variant="outline" className="w-full h-12 text-base font-semibold rounded-xl">
+                    Contact Sales
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ==============================================================
+            SECTION 6: FAQ
+            ============================================================== */}
+        <section id="faq" className="py-24 sm:py-32 bg-secondary/30 border-b border-border">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div className="text-center space-y-4">
+              <span className="text-sm font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+                Got Questions?
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display tracking-tight text-foreground">
+                Frequently Asked Questions.
+              </h2>
+            </div>
+
+            <div className="space-y-6">
+              {FAQS.map((faq, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-2xl border border-border bg-card p-6 sm:p-8 space-y-3 shadow-xs"
+                >
+                  <h3 className="text-xl font-bold font-display text-foreground flex items-center gap-3">
+                    <HelpCircle className="h-5 w-5 text-sky-500 shrink-0" />
+                    <span>{faq.q}</span>
                   </h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed pl-6">{item.a}</p>
+                  <p className="text-base text-muted-foreground leading-relaxed pl-8">
+                    {faq.a}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Section 9: Free Demo Lead Booking Form */}
-        <section id="demo" className="py-20 bg-gradient-to-b from-background to-card">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div className="lg:col-span-5 space-y-5">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-mono text-primary">
-                <Clock className="h-3.5 w-3.5" />
-                <span>20-Minute Live Walkthrough</span>
-              </div>
-
-              <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight">
-                Ready to elevate your store operations?
+        {/* ==============================================================
+            SECTION 7: INTERACTIVE DEMO BOOKING FORM
+            ============================================================== */}
+        <section id="demo" className="py-24 sm:py-32">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+            <div className="text-center space-y-4">
+              <span className="text-sm font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+                Experience NexGen In Action
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display tracking-tight text-foreground">
+                Schedule a Free Live Demo.
               </h2>
-
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Book a personalized live demonstration with one of our Philippine POS specialists.
-                We will walk through your exact menu, kitchen printer routing, and BIR sales book
-                requirements.
+              <p className="text-lg text-muted-foreground">
+                Our Philippine technical team will demonstrate live offline transactions, BIR reports, and mall file exports tailored to your store.
               </p>
-
-              <div className="rounded-xl border border-border bg-card p-4 space-y-3 text-xs text-muted-foreground">
-                <div className="font-display font-bold text-foreground text-sm">
-                  What we cover during the demo:
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                  <span>Interactive table map layout and bill-splitting demo.</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                  <span>Live test of Senior/PWD auto-exempt discounting &amp; sales books.</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                  <span>How absentee owners monitor sales and backups remotely on mobile.</span>
-                </div>
-              </div>
             </div>
 
-            <div className="lg:col-span-7">
-              <Card className="border-primary/30 shadow-xl brand-glow">
-                <CardHeader>
-                  <CardTitle className="text-base font-display font-bold">Schedule Your Free Demo</CardTitle>
-                  <CardDescription className="text-xs">
-                    Fill in your details below and we will contact you within 24 hours.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <DemoForm />
-                </CardContent>
-              </Card>
+            <div className="rounded-2xl border border-border bg-card p-8 sm:p-10 shadow-lg">
+              <DemoForm />
             </div>
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-border bg-card py-12 text-xs text-muted-foreground">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 font-display font-bold text-sm text-foreground">
-              <div className="relative h-6 w-6 rounded overflow-hidden border border-primary/40 bg-card">
-                <Image src="/box_logo.png" alt="NexGen POS" fill sizes="24px" className="object-contain p-0.5" />
+      {/* ==============================================================
+          FOOTER
+          ============================================================== */}
+      <footer className="border-t border-slate-800 bg-[#0f172a] text-slate-300 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="space-y-4 md:col-span-2">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg overflow-hidden border border-slate-700 bg-slate-900 flex items-center justify-center">
+                  <Image src="/box_logo.png" alt="NexGen POS" width={40} height={40} />
+                </div>
+                <span className="font-display font-bold text-2xl text-white">
+                  NexGen <span className="text-sky-400">POS</span>
+                </span>
               </div>
-              <span>NexGen POS Philippines</span>
+              <p className="text-sm text-slate-400 max-w-md leading-relaxed">
+                The offline-first Point of Sale system engineered specifically for Philippine restaurants, food stalls, cafes, and retail chains.
+              </p>
             </div>
-            <p className="text-xs leading-relaxed">
-              Heavy-duty offline-first Point of Sale system with automated BIR compliance, kitchen
-              printer routing, and multi-branch cloud telemetry.
-            </p>
+
+            <div>
+              <h4 className="font-semibold text-white text-base mb-3 font-display">Navigation</h4>
+              <ul className="space-y-2 text-sm text-slate-400">
+                <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
+                <li><a href="#bir-malls" className="hover:text-white transition-colors">BIR &amp; Malls</a></li>
+                <li><a href="#hardware" className="hover:text-white transition-colors">Hardware</a></li>
+                <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="#faq" className="hover:text-white transition-colors">FAQ</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-white text-base mb-3 font-display">Owner Access</h4>
+              <ul className="space-y-2 text-sm text-slate-400">
+                <li>
+                  <Link href="/portal-login" className="text-sky-400 hover:text-sky-300 font-medium">
+                    Owner Fleet Portal →
+                  </Link>
+                </li>
+                <li><span className="text-xs text-slate-500">Live multi-branch sales monitoring</span></li>
+              </ul>
+            </div>
           </div>
 
-          <div className="space-y-2">
-            <div className="font-display font-bold text-foreground uppercase tracking-wider text-[11px]">
-              Features
-            </div>
-            <ul className="space-y-1.5 text-xs">
-              <li><a href="#features" className="hover:text-foreground">Offline SQLite Speed</a></li>
-              <li><a href="#bir-compliance" className="hover:text-foreground">7 BIR Sales Books</a></li>
-              <li><a href="#bir-compliance" className="hover:text-foreground">Mall RLC File Generator</a></li>
-              <li><a href="#hardware" className="hover:text-foreground">Kitchen Impact Routing</a></li>
-            </ul>
-          </div>
-
-          <div className="space-y-2">
-            <div className="font-display font-bold text-foreground uppercase tracking-wider text-[11px]">
-              Solutions
-            </div>
-            <ul className="space-y-1.5 text-xs">
-              <li><a href="#solutions" className="hover:text-foreground">Casual Dining &amp; Bars</a></li>
-              <li><a href="#solutions" className="hover:text-foreground">Cafes &amp; Milk Tea</a></li>
-              <li><a href="#solutions" className="hover:text-foreground">Bakeries &amp; Kiosks</a></li>
-              <li><a href="#pricing" className="hover:text-foreground">Transparent Pricing</a></li>
-            </ul>
-          </div>
-
-          <div className="space-y-2">
-            <div className="font-display font-bold text-foreground uppercase tracking-wider text-[11px]">
-              SuperAdmin Portal
-            </div>
-            <p className="text-xs">
-              Registered restaurant operators and franchise managers:
-            </p>
-            <Link
-              href="/portal-login"
-              className="inline-flex items-center gap-1.5 text-primary hover:underline font-semibold"
-            >
-              <Lock className="h-3.5 w-3.5" /> Operator Portal Sign In
-            </Link>
-          </div>
-        </div>
-
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-8 mt-8 border-t border-border flex flex-wrap items-center justify-between gap-4 text-[11px]">
-          <span>© 2026 NexGen POS. All rights reserved. Built for Philippine F&amp;B and Retail.</span>
-          <div className="flex items-center gap-4">
-            <a href="#features" className="hover:text-foreground">Features</a>
-            <a href="#pricing" className="hover:text-foreground">Pricing</a>
-            <a href="#demo" className="hover:text-foreground">Demo Request</a>
+          <div className="pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 NexGen POS. All rights reserved.</p>
+            <p>Designed strictly under Republic Acts 9994, 10754, and BIR Revenue Regulations.</p>
           </div>
         </div>
       </footer>
