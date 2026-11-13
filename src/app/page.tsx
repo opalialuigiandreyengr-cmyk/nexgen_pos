@@ -160,9 +160,9 @@ export default function LandingPage() {
         {/* ==============================================================
             HERO SECTION — full-bleed background image with built-in fade
             ============================================================== */}
-        <section className="relative overflow-hidden border-b border-border bg-background flex flex-col lg:block lg:min-h-[600px]">
-          {/* Background photo (hero.png already fades to the left; overlay blends it into the theme bg) */}
-          <div className="relative order-2 lg:order-none h-64 sm:h-96 lg:h-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[75%]">
+        <section className="relative overflow-hidden border-b border-border bg-background flex flex-col lg:block lg:min-h-[520px]">
+          {/* Background photo: anchored to the right, fade covers left data while preserving hardware */}
+          <div className="relative order-2 lg:order-none h-60 sm:h-80 lg:h-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[75%] pointer-events-none select-none">
             <Image
               src="/images/hero.png"
               alt="NexGen POS touch terminal showing table management beside a receipt printer on a cafe counter"
@@ -171,32 +171,32 @@ export default function LandingPage() {
               sizes="(max-width: 1024px) 100vw, 75vw"
               className="object-cover object-right dark:brightness-90"
             />
-            {/* Desktop: fade image into the page background from the left, lessened to the right to preserve hardware opacity */}
-            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-background from-0% via-background/60 via-10% to-transparent to-25%" />
+            {/* Desktop: fade image into page background just enough to cover left data (stops at 40% before printer) */}
+            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-background from-0% via-background/90 via-22% to-transparent to-40%" />
             {/* Mobile: fade image into the text block above it */}
-            <div className="lg:hidden absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-background to-transparent" />
+            <div className="lg:hidden absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-background to-transparent" />
           </div>
 
           {/* Content */}
-          <div className="relative z-10 order-1 lg:order-none max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-10 pb-6 sm:pt-14 lg:py-20 lg:min-h-[600px] flex items-center">
-            <div className="w-full lg:max-w-[34rem] space-y-6 text-center lg:text-left">
-              {/* Badge with PH flag */}
-              <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-800 dark:text-amber-300 text-xs sm:text-sm font-semibold shadow-xs">
+          <div className="relative z-10 order-1 lg:order-none max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-6 pb-6 sm:pt-8 lg:py-12 lg:min-h-[520px] flex items-center">
+            <div className="w-full lg:max-w-[34rem] space-y-4 text-center lg:text-left">
+              {/* Badge with PH flag — dark amber in light mode for clear contrast */}
+              <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1 rounded-full border border-amber-500/35 bg-amber-500/15 text-amber-950 dark:text-amber-200 text-xs sm:text-sm font-bold shadow-xs">
                 <Image
                   src="/images/flag.png"
                   alt="Philippine flag"
-                  width={24}
-                  height={24}
-                  className="h-6 w-6 rounded-full"
+                  width={22}
+                  height={22}
+                  className="h-5.5 w-5.5 rounded-full object-cover shadow-xs"
                 />
                 <span>Modern POS for Philippine Businesses</span>
               </div>
 
-              {/* Headline — three lines, same as mockup */}
-              <h1 className="font-extrabold font-display tracking-tight leading-[1.12] text-3xl sm:text-5xl lg:text-[3.1rem] text-foreground">
-                <span className="block">A Smarter,</span>
-                <span className="block text-[#1e293b] dark:text-sky-400">BIR-Ready POS</span>
-                <span className="relative inline-block">
+              {/* Headline — navbar navy in light mode matching header */}
+              <h1 className="font-extrabold font-display tracking-tight leading-[1.12] text-3xl sm:text-5xl lg:text-[3rem] text-[#0f172a] dark:text-white">
+                <span className="block text-[#0f172a] dark:text-white">A Smarter,</span>
+                <span className="block text-[#0f172a] dark:text-sky-400">BIR-Ready POS</span>
+                <span className="relative inline-block text-[#0f172a] dark:text-white">
                   for Growing Businesses
                   <svg
                     className="absolute -bottom-2 left-0 w-full h-3 text-amber-500"
@@ -210,16 +210,16 @@ export default function LandingPage() {
                 </span>
               </h1>
 
-              <p className="text-base sm:text-lg text-foreground/80 leading-relaxed max-w-md mx-auto lg:mx-0">
+              <p className="text-sm sm:text-base text-foreground/85 leading-relaxed max-w-md mx-auto lg:mx-0">
                 Run your sales, tables, orders, and reports with confidence. Built for Philippine businesses — with BIR discount support, mall reporting, and offline reliability.
               </p>
 
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-0.5">
                 <a href="#demo" className="w-full sm:w-auto">
                   <Button
                     size="lg"
-                    className="w-full sm:w-auto h-12 px-8 text-base font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-lg shadow-md"
+                    className="w-full sm:w-auto h-11 px-7 text-sm sm:text-base font-semibold bg-sky-600 hover:bg-sky-500 text-white rounded-lg shadow-md"
                   >
                     Request a Demo
                     <ArrowRight className="h-4 w-4 ml-2" />
@@ -229,15 +229,15 @@ export default function LandingPage() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-lg border-border bg-background/80 backdrop-blur-sm hover:bg-accent text-foreground"
+                    className="w-full sm:w-auto h-11 px-7 text-sm sm:text-base font-semibold rounded-lg border-border bg-background/80 backdrop-blur-sm hover:bg-accent text-foreground"
                   >
                     View Pricing
                   </Button>
                 </a>
               </div>
 
-              {/* Proof points — icon badge uses the navbar gradient, icon centered */}
-              <ul className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-4 sm:gap-0 sm:divide-x sm:divide-border pt-2 text-left w-full">
+              {/* Proof points — subtitle is black in light mode */}
+              <ul className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-0 sm:divide-x sm:divide-border pt-1.5 text-left w-full">
                 {[
                   { icon: ShieldCheck, title: "BIR Discount Ready", sub: "RA 9994 / RA 10754" },
                   { icon: WifiOff, title: "Works Offline", sub: "No Internet? No Problem" },
@@ -248,8 +248,8 @@ export default function LandingPage() {
                       <Icon className="h-4 w-4" aria-hidden="true" />
                     </span>
                     <span className="leading-tight">
-                      <span className="block text-sm font-bold text-foreground">{title}</span>
-                      <span className="block text-xs text-muted-foreground">{sub}</span>
+                      <span className="block text-xs sm:text-sm font-bold text-foreground">{title}</span>
+                      <span className="block text-[11px] text-zinc-950 dark:text-zinc-300 font-semibold">{sub}</span>
                     </span>
                   </li>
                 ))}
