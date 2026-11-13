@@ -198,11 +198,11 @@ export default function LandingPage() {
                 <span className="text-amber-600 dark:text-amber-300 font-bold">Modern POS for Philippine Businesses</span>
               </div>
 
-              {/* Headline — comfortable spacing from monitor */}
-              <h1 className="font-extrabold font-display tracking-tight leading-[1.12] text-3xl sm:text-5xl lg:text-[2.95rem] xl:text-[3.1rem]">
+              {/* Headline — exactly 3 lines matching inspiration design */}
+              <h1 className="font-extrabold font-display tracking-tight leading-[1.12] text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[2.9rem] text-[#0f172a] dark:text-white">
                 <span className="block text-[#0f172a] dark:text-white">A Smarter,</span>
                 <span className="block text-sky-500 dark:text-sky-400">BIR-Ready POS</span>
-                <span className="relative inline-block text-black dark:text-white">
+                <span className="relative inline-block text-[#0f172a] dark:text-white whitespace-nowrap">
                   for Growing Businesses
                   <svg
                     className="absolute -bottom-2 left-0 w-full h-3 text-amber-500"
@@ -216,7 +216,7 @@ export default function LandingPage() {
                 </span>
               </h1>
 
-              <p className="text-sm sm:text-base text-foreground/85 leading-relaxed max-w-md mx-auto lg:mx-0">
+              <p className="text-sm sm:text-base text-foreground/85 leading-relaxed max-w-[30rem] mx-auto lg:mx-0">
                 Run your sales, tables, orders, and reports with confidence. Built for Philippine businesses — with BIR discount support, mall reporting, and offline reliability.
               </p>
 
@@ -242,40 +242,40 @@ export default function LandingPage() {
                 </a>
               </div>
 
-              {/* Feature badges — single unified pill bar matching mockup, clear of printer */}
-              <div className="pt-3 pb-2 w-full max-w-full lg:max-w-[31rem]">
-                <div className="inline-flex flex-col sm:flex-row items-stretch sm:items-center rounded-2xl border border-border/80 bg-background/90 backdrop-blur-md p-2 sm:p-2.5 shadow-xs sm:divide-x sm:divide-border w-full gap-2.5 sm:gap-0">
+              {/* Feature badges — exact horizontal pill card matching inspiration mockup */}
+              <div className="pt-2 w-fit max-w-full">
+                <div className="inline-flex flex-col sm:flex-row items-stretch sm:items-center rounded-2xl border border-border/80 bg-background/95 backdrop-blur-md p-2 shadow-xs sm:divide-x sm:divide-border gap-2.5 sm:gap-0">
                   {/* Item 1: BIR Discount Ready */}
-                  <div className="flex items-center gap-2.5 px-3 first:pl-1 sm:flex-1 min-w-0">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0f172a] text-white shadow-xs">
+                  <div className="flex items-center gap-2.5 sm:pr-3.5 first:sm:pl-1">
+                    <span className="flex h-7.5 w-7.5 shrink-0 items-center justify-center rounded-full bg-[#0f172a] text-white shadow-xs">
                       <ShieldCheck className="h-4 w-4" aria-hidden="true" />
                     </span>
-                    <span className="leading-tight min-w-0">
+                    <div className="leading-tight text-left">
                       <span className="block text-xs font-bold text-foreground">BIR Discount Ready</span>
-                      <span className="block text-[11px] text-zinc-700 dark:text-zinc-300 font-normal">RA 9994 / RA 10754</span>
-                    </span>
+                      <span className="block text-[10px] text-zinc-600 dark:text-zinc-400 font-normal whitespace-nowrap">RA 9994 / RA 10754</span>
+                    </div>
                   </div>
 
-                  {/* Item 2: Works Offline — wraps description without truncating */}
-                  <div className="flex items-center gap-2.5 px-3 sm:flex-1 min-w-0">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0f172a] text-white shadow-xs">
+                  {/* Item 2: Works Offline */}
+                  <div className="flex items-center gap-2.5 sm:px-3.5">
+                    <span className="flex h-7.5 w-7.5 shrink-0 items-center justify-center rounded-full bg-[#0f172a] text-white shadow-xs">
                       <WifiOff className="h-4 w-4" aria-hidden="true" />
                     </span>
-                    <span className="leading-tight min-w-0">
+                    <div className="leading-tight text-left">
                       <span className="block text-xs font-bold text-foreground">Works Offline</span>
-                      <span className="block text-[11px] text-zinc-700 dark:text-zinc-300 font-normal leading-snug">No Internet? No Problem</span>
-                    </span>
+                      <span className="block text-[10px] text-zinc-600 dark:text-zinc-400 font-normal whitespace-nowrap">No Internet? No Problem</span>
+                    </div>
                   </div>
 
-                  {/* Item 3: Mall Reporting — clear of product image */}
-                  <div className="flex items-center gap-2.5 px-3 last:pr-1 sm:flex-1 min-w-0">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0f172a] text-white shadow-xs">
+                  {/* Item 3: Mall Reporting */}
+                  <div className="flex items-center gap-2.5 sm:pl-3.5 last:sm:pr-1">
+                    <span className="flex h-7.5 w-7.5 shrink-0 items-center justify-center rounded-full bg-[#0f172a] text-white shadow-xs">
                       <BarChart3 className="h-4 w-4" aria-hidden="true" />
                     </span>
-                    <span className="leading-tight min-w-0">
+                    <div className="leading-tight text-left">
                       <span className="block text-xs font-bold text-foreground">Mall Reporting</span>
-                      <span className="block text-[11px] text-zinc-700 dark:text-zinc-300 font-normal">Concessionaire Ready</span>
-                    </span>
+                      <span className="block text-[10px] text-zinc-600 dark:text-zinc-400 font-normal whitespace-nowrap">Concessionaire Ready</span>
+                    </div>
                   </div>
                 </div>
               </div>
